@@ -1,45 +1,70 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output
+} from '@angular/core';
+
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input',
+  standalone: true,
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
-  standalone: true,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputComponent),
+      multi: true
+    }
+  ]
 })
-export class InputComponent {
-  @Input() type: string = 'text';
-  @Input() id: string = '';
-  @Input() name: string = '';
-  @Input() value: string = '';
-  @Input() placeholder: string = '';
-  @Input() autocomplete: string = 'on';
-  @Input() autofocus: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() readonly: boolean = false;
-  @Input() required: boolean = false;
-  @Input() minlength?: number;
-  @Input() maxlength?: number;
-  @Input() pattern?: string;
-  @Input() size?: number;
-  @Input() tabindex?: number;
-  @Input() spellcheck: boolean = true;
-  @Input() inputmode?: string;
-  @Input() ariaLabel?: string;
-  @Input() ariaRequired?: string;
+export class InputComponent implements ControlValueAccessor {
 
-@Output() input = new EventEmitter<Event>();
-  @Output() change = new EventEmitter<Event>();
-  @Output() focus = new EventEmitter<FocusEvent>();
-  @Output() blur = new EventEmitter<FocusEvent>();
-  @Output() keydown = new EventEmitter<KeyboardEvent>();
-  @Output() keyup = new EventEmitter<KeyboardEvent>();
-  @Output() keypress = new EventEmitter<KeyboardEvent>();
-  @Output() click = new EventEmitter<MouseEvent>();
-  @Output() dblclick = new EventEmitter<MouseEvent>();
-  @Output() paste = new EventEmitter<ClipboardEvent>();
-  @Output() cut = new EventEmitter<ClipboardEvent>();
-  @Output() copy = new EventEmitter<ClipboardEvent>();
-  @Output() mouseenter = new EventEmitter<MouseEvent>();
-  @Output() mouseleave = new EventEmitter<MouseEvent>();
-  @Output() contextmenu = new EventEmitter<MouseEvent>();
+  @Input() type         = 'text';
+  @Input() id           = '';
+  @Input() name         = '';
+  @Input() placeholder  = '';
+  @Input() autocomplete = 'on';
+  @Input() autofocus    = false;
+  @Input() readonly     = false;
+  @Input() required     = false;
+
+  value = '';
+  disabled = false;
+
+  private onChange: (value: string) => void = () => {};
+  private onTouched: () => void = () => {};
+
+  writeValue(value: string | null): void {
+    this.value = value ?? '';
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  handleInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+
+    this.value = value;
+    this.onChange(value);
+  }
+
+  handleBlur(): void {
+    this.onTouched();
+  }
 }

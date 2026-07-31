@@ -1,27 +1,25 @@
-<button 
-  [ngClass]="buttonClasses" 
-  [disabled]="loading || disabled" 
-  [attr.aria-label]="text"
+<button
+  [ngClass]="buttonClasses"
+  [disabled]="loading || disabled"
+  [attr.aria-label]="ariaLabel || text"
+  [attr.aria-busy]="loading || null"
   (click)="onClick()"
   [type]="type">
 
+  @if (loading) {
+    <span class="btn-spinner" aria-hidden="true"></span>
+  }
 
-  @if (icon && iconPosition === 'left') {
-    <ng-container>
-      <i [class]="icon" class="icon-left" [ngClass]="{'active' : !loading}"></i>
-    </ng-container>
+  @if (icon && iconPosition === 'left' && !loading) {
+    <i [class]="icon" class="btn-icon" aria-hidden="true"></i>
   }
 
   @if (text && !loading) {
-     <span class="description" [ngClass]="{'active' : !loading}">{{ text }}</span>
+    <span class="btn-text">{{ text }}</span>
   }
 
-  <span class="spinner" [ngClass]="{'loading' : loading}"></span>
-
-  @if (icon && iconPosition === 'right') {
-    <ng-container>
-      <i [class]="icon" class="icon-right" [ngClass]="{'active' : !loading}"></i>
-    </ng-container>
+  @if (icon && iconPosition === 'right' && !loading) {
+    <i [class]="icon" class="btn-icon" aria-hidden="true"></i>
   }
 
 </button>

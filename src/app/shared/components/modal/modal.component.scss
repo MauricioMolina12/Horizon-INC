@@ -1,9 +1,9 @@
 $modal-z-index: 10000;
-$backdrop-bg: rgba(0, 0, 0, 0.55);
+$backdrop-bg: var(--overlay-backdrop, rgba(0, 0, 0, 0.55));
 
 $radius: 16px;
-$shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-$bg: #ffffff;
+$shadow: var(--shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.25));
+$bg: var(--overlay-modal-bg, #ffffff);
 
 $transition: 0.25s ease;
 

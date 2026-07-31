@@ -6,9 +6,9 @@ import { AuthCredentials } from './auth-provider';
 import {
   checkSession,
   checkSessionNoSession,
+  initSessionFromCookies,
   login,
   logout,
-  mockLoginAs,
 } from '../../store/user/user.actions';
 import {
   selectAuthError,
@@ -17,20 +17,16 @@ import {
   selectAuthUser,
   selectIsAuthenticated,
 } from '../../store/user/user.selectors';
-import { AuthUser, UserRole } from '../../shared/models/auth-user.model';
+import { User, UserRole } from '../../shared/models/auth-user.model';
 
-/**
- * Facade that every component uses to interact with auth.
- *
- * - Exposes **signals** for template binding (no async pipe needed).
- * - Delegates to NgRx store — components never dispatch actions directly.
- * - SSR-safe: no `window` / `localStorage` access here.
- */
+
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
 
   /** Current authenticated user, or `null`. */
-  readonly currentUser: Signal<AuthUser | null>;
+  readonly currentUser: Signal<User | null>;
+
+  readonly user_id    = computed(() => this.currentUser()?.id ?? null);
 
   /** Whether a valid session exists. */
   readonly isAuthenticated: Signal<boolean>;
@@ -53,9 +49,17 @@ export class AuthFacade {
     this.isLoading       = toSignal(this.store.select(selectAuthLoading),       { initialValue: false });
     this.isLoaded        = toSignal(this.store.select(selectAuthLoaded),        { initialValue: false });
     this.error           = toSignal(this.store.select(selectAuthError),         { initialValue: null  });
+
   }
 
-  /** Call once at app startup (e.g. in AppComponent or APP_INITIALIZER). */
+  /**
+   * Initialize session from cookies.
+   */
+  initSession(): void {
+    this.store.dispatch(initSessionFromCookies());
+  }
+
+  /** Call once at app startup when using AuthProvider-based flow. */
   checkSession(): void {
     this.store.dispatch(checkSession());
   }
@@ -65,10 +69,11 @@ export class AuthFacade {
     this.store.dispatch(login({ credentials }));
   }
 
-  /** End session + navigate to login. */
+  /**
+   * Dispatch logout action. The effect handles POST + redirect.
+   */
   logout(): void {
     this.store.dispatch(logout());
-    this.router.navigate(['/user/login']);
   }
 
   /** Mark auth state as loaded without authenticating (used during SSR). */
@@ -82,11 +87,4 @@ export class AuthFacade {
   /** Whether the current user has the admin role. */
   readonly isAdmin: Signal<boolean> = computed(() => this.currentUser()?.role === 'admin');
 
-  /**
-   * Dev-only: instantly log in as a specific role.
-   * Use `authFacade.mockLoginAs('seller')` to simulate a seller session.
-   */
-  mockLoginAs(role: UserRole): void {
-    this.store.dispatch(mockLoginAs({ role }));
-  }
 }

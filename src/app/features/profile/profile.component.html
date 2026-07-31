@@ -1,15 +1,8 @@
-<div class="profile-layout">
-
-  <div class="profile-header">
-    <app-profile-header
-      [user]="user()"
-      [loading]="loading()"
-      [activeRoute]="currentRoute()"
-    ></app-profile-header>
+<div class="profile-layout mw-global">
+  <div class="profile__hero">
+    <app-profile-hero [user]="user()" [loading]="loading()" (avatarChange)="onAvatarChange()" />
   </div>
-
-  <main class="profile-main">
-    <router-outlet></router-outlet>
-  </main>
-
+  <div class="profile__settings">
+    <app-profile-settings />
+  </div>
 </div>

@@ -11,14 +11,14 @@
 
   <div class="hero-buttons">
     <button class="hero-button" (click)="prevSlide()">
-      <i class="icon-arrow-chevron-left"></i>
+      <i class="ti ti-chevron-left"></i>
     </button>
     <button class="hero-button" (click)="nextSlide()">
-      <i class="icon-arrow-chevron-right"></i>
+      <i class="ti ti-chevron-right"></i>
     </button>
-    <button class="hero-button" (click)="toggleSlider()">
-      <i [ngClass]="{'icon-play' : !toggleSlide, 'icon-paused': toggleSlide}"></i>
-    </button>
+    <!-- <button class="hero-button" (click)="toggleSlider()">
+      <i [ngClass]="{'ti ti-player-play' : !toggleSlide, 'ti ti-player-pause': toggleSlide}"></i>
+    </button> -->
   </div>
 
   <div class="hero-slider">

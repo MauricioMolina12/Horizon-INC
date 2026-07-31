@@ -3,30 +3,14 @@
     @case (sliderType.default) {
       <header class="slider-products__header">
         <h1 class="slider-products-title title-section">{{title}}</h1>
-        <app-button [text]="'Ver todas las ofertas'" aria-label="Ver todos las ofertas" variant="ghost"
-                    [classCustom]="{
-                        base: 'button',
-                        bgColor: 'primary-to-white',
-                        textColor: 'white',
-                        more: ['rounded-lg', 'p-4', 'text-sm']
-                }"></app-button>
+        <app-button [text]="'Ver todas las ofertas'" aria-label="Ver todos las ofertas" variant="ghost" size="sm"></app-button>
       </header>
     }
     @case (sliderType.flashSale) {
       <header class="slider-products__header--flash-sale">
-        <app-button [text]="'Ver todas'" aria-label="Ver todas las ofertas relampago" variant="ghost"
-                    [classCustom]="{
-                    base: 'button', 
-                    bgColor: 'light', 
-                    more: [
-                    'z-index-100',
-                    'p-absolute',
-                    'top-10',
-                    'right-10']
-                    
-                    }">
+        <app-button [text]="'Ver todas'" aria-label="Ver todas las ofertas relampago" variant="ghost" size="sm">
         </app-button>
-        <span class="slider-products__header--flash-sale--title"><i class="icon-ray"></i> Ofertas relampago en
+        <span class="slider-products__header--flash-sale--title"><i class="ti ti-bolt"></i> Ofertas relampago en
       prendas</span>
       <h2 class="slider-products__header--flash-sale--time">{{ flashSaleService.getTime() | timeRemaining}}
       </h2>
@@ -63,14 +47,14 @@
     (click)="loading ? null : scrollSlider('left')"
     [disabled]="isAtStart"
     [class.disabled]="isAtStart">
-    <i class="icon icon-arrow-chevron-left"></i>
+    <i class="ti ti-chevron-left"></i>
   </button>
 
   <button class="slider-products__button-arrow-right arrow"
     (click)="loading ? null : scrollSlider('right')"
     [disabled]="isAtEnd"
     [class.disabled]="isAtEnd">
-    <i class="icon icon-arrow-chevron-right"></i>
+    <i class="ti ti-chevron-right"></i>
   </button>
 }
 </section>

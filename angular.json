@@ -52,7 +52,8 @@
               "src/app/shared/styles/typography.scss",
               "src/app/shared/styles/skeleton.scss",
               "src/app/shared/styles/loader.scss",
-              "src/assets/icons/style.css"
+              "src/assets/icons/style.css",
+              "node_modules/@tabler/icons-webfont/dist/tabler-icons.min.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

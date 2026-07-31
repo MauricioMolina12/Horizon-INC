@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, effect } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AppService } from './app.service';
 import { GlobalLoaderService } from './core/services/global-loader.service';
@@ -20,17 +20,22 @@ export class AppComponent implements OnInit {
     private authFacade: AuthFacade,
     private titleService: Title,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    effect(() => {
+      if (this.authFacade.isLoaded()) {
+        setTimeout(() => { this.globalLoaderService.hide() }, 1500);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.appService.startApp();
     this.titleService.setTitle(this.title);
 
     if (isPlatformBrowser(this.platformId)) {
-      // Restore session on app startup (browser only)
-      this.authFacade.checkSession();
+      document.getElementById('app-splash')?.remove();
+      this.authFacade.initSession();
     } else {
-      // On the server, mark auth as loaded so guards don't block SSR
       this.authFacade.markAsLoaded();
     }
   }

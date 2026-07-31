@@ -1,15 +1,35 @@
-// Custom properties for light mode
+// ═══════════════════════════════════════════════════════════════════════════════════
+//  VARIABLES GLOBALES
+// ═══════════════════════════════════════════════════════════════════════════════════
 
 :root {
+  // ─── Typography ────────────────────────────────────────────────────────────────
   --font-family: "Montserrat", sans-serif;
-  --background-color: #fbfbfb;
-  --background-color2: #f7f8fa;
 
-  /* Others variables */
+  // ─── Spacing & Radius ─────────────────────────────────────────────────────────
   --border-radius: 10px;
 
-  // Custom variables
-  --color-primary-to-white: var(--color-primary);
+  // ─── Opacity / Transparency levels ─────────────────────────────────────────────
+  --opacity-0:    0;
+  --opacity-5:    0.05;
+  --opacity-8:    0.08;
+  --opacity-10:   0.1;
+  --opacity-15:   0.15;
+  --opacity-20:   0.2;
+  --opacity-25:   0.25;
+  --opacity-30:   0.3;
+  --opacity-40:   0.4;
+  --opacity-50:   0.5;
+  --opacity-60:   0.6;
+  --opacity-70:   0.7;
+  --opacity-75:   0.75;
+  --opacity-80:   0.8;
+  --opacity-90:   0.9;
+  --opacity-100:  1;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  1. BRAND COLORS (Paleta base)
+  // ══════════════════════════════════════════════════════════════════════════════
 
   /** primary **/
   --color-primary: #0F4C5C;
@@ -36,40 +56,6 @@
   --color-tertiary-contrast-rgb: 255, 255, 255;
   --color-tertiary-shade: #004ca8;
   --color-tertiary-tint: #1a67c5;
-
-  /** success **/
-  --color-success: #3aa337;
-  --color-success-rgb: 58, 163, 55;
-  --color-success-contrast: #000000;
-  --color-success-contrast-rgb: 0, 0, 0;
-  --color-success-shade: #338f30;
-  --color-success-tint: #4eac4b;
-  --color-success-light: #e8ffe8;
-
-  /** warning **/
-  --color-warning: #fdc520;
-  --color-warning-rgb: 253, 197, 32;
-  --color-warning-contrast: #000000;
-  --color-warning-contrast-rgb: 0, 0, 0;
-  --color-warning-shade: #dfad1c;
-  --color-warning-tint: #fdcb36;
-  --color-warning-light: rgb(255, 253, 218);
-
-  /** danger **/
-  --color-danger: #dc4040;
-  --color-danger-rgb: 220, 64, 64;
-  --color-danger-contrast: #ffffff;
-  --color-danger-contrast-rgb: 255, 255, 255;
-  --color-danger-shade: #c23838;
-  --color-danger-tint: #e05353;
-
-  /* Orange */
-  --color-orange: #f57c00;
-  --color-orange-rgb: 245, 124, 0;
-  --color-orange-contrast: #ffffff;
-  --color-orange-contrast-rgb: 255, 255, 255;
-  --color-orange-shade: #db6f00;
-  --color-orange-tint: #ffb061ea;
 
   /** dark **/
   --color-dark: #2d2d2d;
@@ -127,7 +113,90 @@
   --color-light-blue-shade: #acc0df;
   --color-light-blue-tint: #c9defd;
 
-  //  Text
+  /** dark-gray **/
+  --color-dark-gray: #545453;
+  --color-dark-gray-rgb: 64, 66, 72;
+  --color-dark-gray-contrast: #ffffff;
+  --color-dark-gray-contrast-rgb: 255, 255, 255;
+  --color-dark-gray-shade: #383a3f;
+  --color-dark-gray-tint: #53555a;
+
+  /** blue-light **/
+  --color-blue-light: #f2f8ff;
+  --color-blue-light-rgb: 242, 248, 255;
+  --color-blue-light-contrast: #000000;
+  --color-blue-light-contrast-rgb: 0, 0, 0;
+  --color-blue-light-shade: #d5dae0;
+  --color-blue-light-tint: #f3f9ff;
+
+  // ─── Semantic Utility Colors ───────────────────────────────────────────────
+
+  /** Orange (used for ratings, highlights) **/
+  --color-orange: #f57c00;
+  --color-orange-rgb: 245, 124, 0;
+  --color-orange-contrast: #ffffff;
+  --color-orange-contrast-rgb: 255, 255, 255;
+  --color-orange-shade: #db6f00;
+  --color-orange-tint: #ffb061ea;
+
+  /** Teal **/
+  --color-teal: #19d8c6;
+  --color-teal-rgb: 25, 216, 198;
+  --color-teal-contrast: #000000;
+  --color-teal-contrast-rgb: 0, 0, 0;
+  --color-teal-shade: #16beae;
+  --color-teal-tint: #30dccc;
+
+  /** teal-light **/
+  --color-teal-light: #bdf0e1;
+  --color-teal-light-rgb: 189, 240, 225;
+  --color-teal-light-contrast: #000000;
+  --color-teal-light-contrast-rgb: 0, 0, 0;
+  --color-teal-light-shade: #a6d3c6;
+  --color-teal-light-tint: #c4f2e4;
+
+  /** red-light **/
+  --color-red-light: #fae6e8;
+  --color-red-light-rgb: 250, 230, 232;
+  --color-red-light-contrast: #000000;
+  --color-red-light-contrast-rgb: 0, 0, 0;
+  --color-red-light-shade: #dccacc;
+  --color-red-light-tint: #fbe9ea;
+
+  /** transparent **/
+  --color-transparent: #00000000;
+  --color-transparent-rgb: 0, 0, 0;
+  --color-transparent-contrast: #ffffff;
+  --color-transparent-contrast-rgb: 255, 255, 255;
+  --color-transparent-shade: #000000;
+  --color-transparent-tint: #1a1a1a;
+
+  /** skeleton **/
+  --color-skeleton-base: #e0e0e0;
+  --color-skeleton-medium: #f8f8f8;
+
+  // ─── Social Colors ─────────────────────────────────────────────────────────
+
+  /** facebook **/
+  --color-facebook: #1178f2;
+  --color-facebook-rgb: 66, 103, 178;
+  --color-facebook-contrast: #ffffff;
+  --color-facebook-contrast-rgb: 255, 255, 255;
+  --color-facebook-shade: #3a5b9d;
+  --color-facebook-tint: #5576ba;
+
+  /** google **/
+  --color-google: #b72500;
+  --color-google-rgb: 183, 37, 0;
+  --color-google-contrast: #ffffff;
+  --color-google-contrast-rgb: 255, 255, 255;
+  --color-google-shade: #a12100;
+  --color-google-tint: #be3b1a;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  2. TEXT COLORS
+  // ══════════════════════════════════════════════════════════════════════════════
+
   /** font-blue-dark **/
   --color-font-blue-dark: #031b4e;
   --color-font-blue-dark-rgb: 3, 27, 78;
@@ -176,7 +245,49 @@
   --color-font-light-shade: #e0e0da;
   --color-font-light-tint: #fffff9;
 
-  /** border-gray **/
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  3. SEMANTIC TEXT (nuevo sistema)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --text-primary:      var(--color-primary);
+  --text-secondary:    #555555;
+  --text-tertiary:     #888888;
+  --text-disabled:     #aaa;
+  --text-inverse:      #ffffff;
+  --text-link:         var(--color-font-blue-link);
+  --text-link-hover:   var(--color-tertiary-shade);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  4. BACKGROUND COLORS
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --background-color: #fbfbfb;
+  --background-color2: #f7f8fa;
+
+  // ─── Nuevo sistema de backgrounds ───────────────────────────────────────────
+
+  --bg-primary:          var(--background-color);
+  --bg-secondary:        var(--background-color2);
+  --bg-elevated:         #ffffff;
+  --bg-inverse:          var(--color-primary);
+  --bg-subtle:           #f3f4f6;
+  --bg-accent:           #eef2ff;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  5. SURFACE COLORS
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --surface-primary:     #ffffff;
+  --surface-secondary:   #f8f9fa;
+  --surface-tertiary:    #f0f0f0;
+  --surface-hover:       #f3f4f6;
+  --surface-active:      #e5e7eb;
+  --surface-disabled:    #f9fafb;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  6. BORDER COLORS
+  // ══════════════════════════════════════════════════════════════════════════════
+
   --color-border-gray: #cdd1dc;
   --color-border-gray-rgb: 205, 209, 220;
   --color-border-gray-contrast: #000000;
@@ -184,7 +295,76 @@
   --color-border-gray-shade: #b4b8c2;
   --color-border-gray-tint: #d2d6e0;
 
-  /** shadow-gray **/
+  // ─── Nuevo sistema de bordes ────────────────────────────────────────────────
+
+  --border-primary:      var(--color-border-gray);
+  --border-secondary:    #e5e7eb;
+  --border-subtle:       #f3f4f6;
+  --border-focus:        var(--color-secondary);
+  --border-disabled:     #e0e0e0;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  7. STATE COLORS (Success, Warning, Error, Info)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  /** success **/
+  --color-success: #3aa337;
+  --color-success-rgb: 58, 163, 55;
+  --color-success-contrast: #000000;
+  --color-success-contrast-rgb: 0, 0, 0;
+  --color-success-shade: #338f30;
+  --color-success-tint: #4eac4b;
+  --color-success-light: #e8ffe8;
+
+  /** warning **/
+  --color-warning: #fdc520;
+  --color-warning-rgb: 253, 197, 32;
+  --color-warning-contrast: #000000;
+  --color-warning-contrast-rgb: 0, 0, 0;
+  --color-warning-shade: #dfad1c;
+  --color-warning-tint: #fdcb36;
+  --color-warning-light: rgb(255, 253, 218);
+
+  /** danger (Error) **/
+  --color-danger: #dc4040;
+  --color-danger-rgb: 220, 64, 64;
+  --color-danger-contrast: #ffffff;
+  --color-danger-contrast-rgb: 255, 255, 255;
+  --color-danger-shade: #c23838;
+  --color-danger-tint: #e05353;
+  --color-danger-light: #fef2f2;
+
+  // ─── Soft / Light variants for states ───────────────────────────────────────
+
+  --color-success-soft:   #ecfdf5;
+  --color-warning-soft:   #fffbeb;
+  --color-error-soft:     var(--color-danger-light);
+  --color-info-soft:      var(--color-blue-light);
+
+  // ─── Info (mapped to secondary) ─────────────────────────────────────────────
+
+  --color-info:           var(--color-secondary);
+  --color-info-rgb:       var(--color-secondary-rgb);
+  --color-info-contrast:  var(--color-secondary-contrast);
+  --color-info-light:     var(--color-secondary-tint-light);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  8. ACTION COLORS (Hover, Active, Pressed, Selected, Focus, Disabled)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --action-hover-bg:      var(--surface-hover);
+  --action-active-bg:     var(--surface-active);
+  --action-pressed-bg:    #d1d5db;
+  --action-selected-bg:   rgba(15, 76, 92, 0.08);
+  --action-focus-ring:    rgba(15, 76, 92, 0.25);
+  --action-disabled-bg:   var(--surface-disabled);
+  --action-disabled-text: var(--text-disabled);
+  --action-disabled-border: var(--border-disabled);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  9. SHADOWS
+  // ══════════════════════════════════════════════════════════════════════════════
+
   --color-shadow-gray: #000003;
   --color-shadow-gray-rgb: 0, 0, 3;
   --color-shadow-gray-contrast: #ffffff;
@@ -192,83 +372,69 @@
   --color-shadow-gray-shade: #000003;
   --color-shadow-gray-tint: #1a1a1c;
 
-  // Social
+  // ─── Nuevo sistema de sombras ───────────────────────────────────────────────
 
-  /** facebook **/
-  --color-facebook: #1178f2;
-  --color-facebook-rgb: 66, 103, 178;
-  --color-facebook-contrast: #ffffff;
-  --color-facebook-contrast-rgb: 255, 255, 255;
-  --color-facebook-shade: #3a5b9d;
-  --color-facebook-tint: #5576ba;
+  --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:   0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --shadow-xl:   0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-menu: 0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
 
-  /** google **/
-  --color-google: #b72500;
-  --color-google-rgb: 183, 37, 0;
-  --color-google-contrast: #ffffff;
-  --color-google-contrast-rgb: 255, 255, 255;
-  --color-google-shade: #a12100;
-  --color-google-tint: #be3b1a;
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  10. OVERLAYS
+  // ══════════════════════════════════════════════════════════════════════════════
 
-  /** teal **/
-  --color-teal: #19d8c6;
-  --color-teal-rgb: 25, 216, 198;
-  --color-teal-contrast: #000000;
-  --color-teal-contrast-rgb: 0, 0, 0;
-  --color-teal-shade: #16beae;
-  --color-teal-tint: #30dccc;
+  --overlay-backdrop:   rgba(0, 0, 0, 0.5);
+  --overlay-backdrop-light: rgba(0, 0, 0, 0.25);
+  --overlay-surface:    #ffffff;
+  --overlay-modal-bg:   var(--surface-primary);
+  --overlay-drawer-bg:  var(--surface-primary);
 
-  /** teal-ligh **/
-  --color-teal-light: #bdf0e1;
-  --color-teal-light-rgb: 189, 240, 225;
-  --color-teal-light-contrast: #000000;
-  --color-teal-light-contrast-rgb: 0, 0, 0;
-  --color-teal-light-shade: #a6d3c6;
-  --color-teal-light-tint: #c4f2e4;
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  11. GRADIENTS
+  // ══════════════════════════════════════════════════════════════════════════════
 
-  /** red-light **/
-  --color-red-light: #fae6e8;
-  --color-red-light-rgb: 250, 230, 232;
-  --color-red-light-contrast: #000000;
-  --color-red-light-contrast-rgb: 0, 0, 0;
-  --color-red-light-shade: #dccacc;
-  --color-red-light-tint: #fbe9ea;
-
-  /** transparent **/
-  --color-transparent: #00000000;
-  --color-transparent-rgb: 0, 0, 0;
-  --color-transparent-contrast: #ffffff;
-  --color-transparent-contrast-rgb: 255, 255, 255;
-  --color-transparent-shade: #000000;
-  --color-transparent-tint: #1a1a1a;
-
-  /** dark-gray **/
-  --color-dark-gray: #545453;
-  --color-dark-gray-rgb: 64, 66, 72;
-  --color-dark-gray-contrast: #ffffff;
-  --color-dark-gray-contrast-rgb: 255, 255, 255;
-  --color-dark-gray-shade: #383a3f;
-  --color-dark-gray-tint: #53555a;
-
-  /** blue-light **/
-  --color-blue-light: #f2f8ff;
-  --color-blue-light-rgb: 242, 248, 255;
-  --color-blue-light-contrast: #000000;
-  --color-blue-light-contrast-rgb: 0, 0, 0;
-  --color-blue-light-shade: #d5dae0;
-  --color-blue-light-tint: #f3f9ff;
-
-  --color-skeleton-base: #e0e0e0;
-  --color-skeleton-medium: #f8f8f8;
-
-  /** Others colors **/
   --bg-gradient-main: linear-gradient(#e1e1e1, #ffffff);
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-secondary));
+  --gradient-overlay: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  12. CUSTOM / LEGACY (Color primary to white bridge)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-primary-to-white: var(--color-primary);
 }
 
-// Custom properties for dark mode
+// ═══════════════════════════════════════════════════════════════════════════════════
+//  DARK MODE
+// ═══════════════════════════════════════════════════════════════════════════════════
+
 .dark {
+  // ─── Typography ──────────────────────────────────────────────────────────────
   --font-family: "Montserrat", sans-serif;
-  --background-color: var(--color-primary);
+
+  // ─── Opacity (identical in dark, as it's scale-based) ────────────────────────
+  --opacity-0:    0;
+  --opacity-5:    0.05;
+  --opacity-8:    0.08;
+  --opacity-10:   0.1;
+  --opacity-15:   0.15;
+  --opacity-20:   0.2;
+  --opacity-25:   0.25;
+  --opacity-30:   0.3;
+  --opacity-40:   0.4;
+  --opacity-50:   0.5;
+  --opacity-60:   0.6;
+  --opacity-70:   0.7;
+  --opacity-75:   0.75;
+  --opacity-80:   0.8;
+  --opacity-90:   0.9;
+  --opacity-100:  1;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  1. BRAND COLORS (Dark overrides)
+  // ══════════════════════════════════════════════════════════════════════════════
 
   --color-primary-to-white: #ffffff;
 
@@ -296,31 +462,6 @@
   --color-tertiary-contrast-rgb: 255, 255, 255;
   --color-tertiary-shade: #004ca8;
   --color-tertiary-tint: #1a67c5;
-
-  /** success **/
-  --color-success: #3aa337;
-  --color-success-rgb: 58, 163, 55;
-  --color-success-contrast: #000000;
-  --color-success-contrast-rgb: 0, 0, 0;
-  --color-success-shade: #338f30;
-  --color-success-tint: #4eac4b;
-  --color-success-light: #baf0b8;
-
-  /** warning **/
-  --color-warning: #fdc520;
-  --color-warning-rgb: 253, 197, 32;
-  --color-warning-contrast: #000000;
-  --color-warning-contrast-rgb: 0, 0, 0;
-  --color-warning-shade: #dfad1c;
-  --color-warning-tint: #fdcb36;
-
-  /** danger **/
-  --color-danger: #dc4040;
-  --color-danger-rgb: 220, 64, 64;
-  --color-danger-contrast: #ffffff;
-  --color-danger-contrast-rgb: 255, 255, 255;
-  --color-danger-shade: #c23838;
-  --color-danger-tint: #e05353;
 
   /** dark **/
   --color-dark: #24272a;
@@ -378,121 +519,6 @@
   --color-light-blue-shade: #acc0df;
   --color-light-blue-tint: #c9defd;
 
-  //  Text
-  /** font-blue-dark **/
-  --color-font-blue-dark: #031b4e;
-  --color-font-blue-dark-rgb: 3, 27, 78;
-  --color-font-blue-dark-contrast: #ffffff;
-  --color-font-blue-dark-contrast-rgb: 255, 255, 255;
-  --color-font-blue-dark-shade: #031845;
-  --color-font-blue-dark-tint: #1c3260;
-
-  /** font-blue-light **/
-  --color-font-blue-light: #354971;
-  --color-font-blue-light-rgb: 53, 73, 113;
-  --color-font-blue-light-contrast: #ffffff;
-  --color-font-blue-light-contrast-rgb: 255, 255, 255;
-  --color-font-blue-light-shade: #2f4063;
-  --color-font-blue-light-tint: #495b7f;
-
-  /** font-blue-link **/
-  --color-font-blue-link: #0056bf;
-  --color-font-blue-link-rgb: 0, 86, 191;
-  --color-font-blue-link-contrast: #ffffff;
-  --color-font-blue-link-contrast-rgb: 255, 255, 255;
-  --color-font-blue-link-shade: #004ca8;
-  --color-font-blue-link-tint: #1a67c5;
-
-  /** font-gray **/
-  --color-font-gray: #95a2b5;
-  --color-font-gray-rgb: 149, 162, 181;
-  --color-font-gray-contrast: #000000;
-  --color-font-gray-contrast-rgb: 0, 0, 0;
-  --color-font-gray-shade: #838f9f;
-  --color-font-gray-tint: #a0abbc;
-
-  /** font-gray-dark **/
-  --color-font-gray-dark: #90949c;
-  --color-font-gray-dark-rgb: 144, 148, 156;
-  --color-font-gray-dark-contrast: #000000;
-  --color-font-gray-dark-contrast-rgb: 0, 0, 0;
-  --color-font-gray-dark-shade: #7f8289;
-  --color-font-gray-dark-tint: #9b9fa6;
-
-  /** font-light **/
-  --color-font-light: #fffff8;
-  --color-font-light-rgb: 255, 255, 248;
-  --color-font-light-contrast: #000000;
-  --color-font-light-contrast-rgb: 0, 0, 0;
-  --color-font-light-shade: #e0e0da;
-  --color-font-light-tint: #fffff9;
-
-  /** border-gray **/
-  --color-border-gray: #cdd1dc;
-  --color-border-gray-rgb: 205, 209, 220;
-  --color-border-gray-contrast: #000000;
-  --color-border-gray-contrast-rgb: 0, 0, 0;
-  --color-border-gray-shade: #b4b8c2;
-  --color-border-gray-tint: #d2d6e0;
-
-  /** shadow-gray **/
-  --color-shadow-gray: #000003;
-  --color-shadow-gray-rgb: 0, 0, 3;
-  --color-shadow-gray-contrast: #ffffff;
-  --color-shadow-gray-contrast-rgb: 255, 255, 255;
-  --color-shadow-gray-shade: #000003;
-  --color-shadow-gray-tint: #1a1a1c;
-
-  // Social
-
-  /** facebook **/
-  --color-facebook: #1178f2;
-  --color-facebook-rgb: 66, 103, 178;
-  --color-facebook-contrast: #ffffff;
-  --color-facebook-contrast-rgb: 255, 255, 255;
-  --color-facebook-shade: #3a5b9d;
-  --color-facebook-tint: #5576ba;
-
-  /** google **/
-  --color-google: #b72500;
-  --color-google-rgb: 183, 37, 0;
-  --color-google-contrast: #ffffff;
-  --color-google-contrast-rgb: 255, 255, 255;
-  --color-google-shade: #a12100;
-  --color-google-tint: #be3b1a;
-
-  /** teal **/
-  --color-teal: #19d8c6;
-  --color-teal-rgb: 25, 216, 198;
-  --color-teal-contrast: #000000;
-  --color-teal-contrast-rgb: 0, 0, 0;
-  --color-teal-shade: #16beae;
-  --color-teal-tint: #30dccc;
-
-  /** teal-ligh **/
-  --color-teal-light: #bdf0e1;
-  --color-teal-light-rgb: 189, 240, 225;
-  --color-teal-light-contrast: #000000;
-  --color-teal-light-contrast-rgb: 0, 0, 0;
-  --color-teal-light-shade: #a6d3c6;
-  --color-teal-light-tint: #c4f2e4;
-
-  /** red-light **/
-  --color-red-light: #fae6e8;
-  --color-red-light-rgb: 250, 230, 232;
-  --color-red-light-contrast: #000000;
-  --color-red-light-contrast-rgb: 0, 0, 0;
-  --color-red-light-shade: #dccacc;
-  --color-red-light-tint: #fbe9ea;
-
-  /** transparent **/
-  --color-transparent: #00000000;
-  --color-transparent-rgb: 0, 0, 0;
-  --color-transparent-contrast: #ffffff;
-  --color-transparent-contrast-rgb: 255, 255, 255;
-  --color-transparent-shade: #000000;
-  --color-transparent-tint: #1a1a1a;
-
   /** dark-gray **/
   --color-dark-gray: #545453;
   --color-dark-gray-rgb: 64, 66, 72;
@@ -509,6 +535,251 @@
   --color-blue-light-shade: #d5dae0;
   --color-blue-light-tint: #f3f9ff;
 
-  /** Others colors **/
-  --bg-gradient-main: linear-gradient(#e1e1e1, #ffffff);
+  // ─── Semantic Utility Colors (dark) ──────────────────────────────────────────
+  --color-orange: #f57c00;
+  --color-orange-rgb: 245, 124, 0;
+  --color-orange-contrast: #ffffff;
+  --color-orange-contrast-rgb: 255, 255, 255;
+  --color-orange-shade: #db6f00;
+  --color-orange-tint: #ffb061ea;
+
+  --color-teal: #19d8c6;
+  --color-teal-rgb: 25, 216, 198;
+  --color-teal-contrast: #000000;
+  --color-teal-contrast-rgb: 0, 0, 0;
+  --color-teal-shade: #16beae;
+  --color-teal-tint: #30dccc;
+
+  --color-teal-light: #bdf0e1;
+  --color-teal-light-rgb: 189, 240, 225;
+  --color-teal-light-contrast: #000000;
+  --color-teal-light-contrast-rgb: 0, 0, 0;
+  --color-teal-light-shade: #a6d3c6;
+  --color-teal-light-tint: #c4f2e4;
+
+  --color-red-light: #fae6e8;
+  --color-red-light-rgb: 250, 230, 232;
+  --color-red-light-contrast: #000000;
+  --color-red-light-contrast-rgb: 0, 0, 0;
+  --color-red-light-shade: #dccacc;
+  --color-red-light-tint: #fbe9ea;
+
+  --color-transparent: #00000000;
+  --color-transparent-rgb: 0, 0, 0;
+  --color-transparent-contrast: #ffffff;
+  --color-transparent-contrast-rgb: 255, 255, 255;
+  --color-transparent-shade: #000000;
+  --color-transparent-tint: #1a1a1a;
+
+  --color-skeleton-base: #333;
+  --color-skeleton-medium: #444;
+
+  // ─── Social Colors (dark) ────────────────────────────────────────────────────
+  --color-facebook: #1178f2;
+  --color-facebook-rgb: 66, 103, 178;
+  --color-facebook-contrast: #ffffff;
+  --color-facebook-contrast-rgb: 255, 255, 255;
+  --color-facebook-shade: #3a5b9d;
+  --color-facebook-tint: #5576ba;
+
+  --color-google: #b72500;
+  --color-google-rgb: 183, 37, 0;
+  --color-google-contrast: #ffffff;
+  --color-google-contrast-rgb: 255, 255, 255;
+  --color-google-shade: #a12100;
+  --color-google-tint: #be3b1a;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  2. TEXT COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-font-blue-dark: #031b4e;
+  --color-font-blue-dark-rgb: 3, 27, 78;
+  --color-font-blue-dark-contrast: #ffffff;
+  --color-font-blue-dark-contrast-rgb: 255, 255, 255;
+  --color-font-blue-dark-shade: #031845;
+  --color-font-blue-dark-tint: #1c3260;
+
+  --color-font-blue-light: #354971;
+  --color-font-blue-light-rgb: 53, 73, 113;
+  --color-font-blue-light-contrast: #ffffff;
+  --color-font-blue-light-contrast-rgb: 255, 255, 255;
+  --color-font-blue-light-shade: #2f4063;
+  --color-font-blue-light-tint: #495b7f;
+
+  --color-font-blue-link: #0056bf;
+  --color-font-blue-link-rgb: 0, 86, 191;
+  --color-font-blue-link-contrast: #ffffff;
+  --color-font-blue-link-contrast-rgb: 255, 255, 255;
+  --color-font-blue-link-shade: #004ca8;
+  --color-font-blue-link-tint: #1a67c5;
+
+  --color-font-gray: #95a2b5;
+  --color-font-gray-rgb: 149, 162, 181;
+  --color-font-gray-contrast: #000000;
+  --color-font-gray-contrast-rgb: 0, 0, 0;
+  --color-font-gray-shade: #838f9f;
+  --color-font-gray-tint: #a0abbc;
+
+  --color-font-gray-dark: #90949c;
+  --color-font-gray-dark-rgb: 144, 148, 156;
+  --color-font-gray-dark-contrast: #000000;
+  --color-font-gray-dark-contrast-rgb: 0, 0, 0;
+  --color-font-gray-dark-shade: #7f8289;
+  --color-font-gray-dark-tint: #9b9fa6;
+
+  --color-font-light: #fffff8;
+  --color-font-light-rgb: 255, 255, 248;
+  --color-font-light-contrast: #000000;
+  --color-font-light-contrast-rgb: 0, 0, 0;
+  --color-font-light-shade: #e0e0da;
+  --color-font-light-tint: #fffff9;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  3. SEMANTIC TEXT (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --text-primary:      #f3f4f6;
+  --text-secondary:    #d1d5db;
+  --text-tertiary:     #9ca3af;
+  --text-disabled:     #6b7280;
+  --text-inverse:      #111827;
+  --text-link:         var(--color-font-blue-link);
+  --text-link-hover:   var(--color-tertiary-tint);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  4. BACKGROUND COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --background-color: var(--color-primary);
+  --background-color2: #0d1b2a;
+
+  --bg-primary:          var(--color-primary);
+  --bg-secondary:        #0d1b2a;
+  --bg-elevated:         #1a2332;
+  --bg-inverse:          #ffffff;
+  --bg-subtle:           #1e293b;
+  --bg-accent:           rgba(99, 102, 241, 0.15);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  5. SURFACE COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --surface-primary:     #1a2332;
+  --surface-secondary:   #1e293b;
+  --surface-tertiary:    #273548;
+  --surface-hover:       #2d3b4e;
+  --surface-active:      #374151;
+  --surface-disabled:    #1f2937;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  6. BORDER COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-border-gray: #374151;
+  --color-border-gray-rgb: 55, 65, 81;
+  --color-border-gray-contrast: #ffffff;
+  --color-border-gray-contrast-rgb: 255, 255, 255;
+  --color-border-gray-shade: #2d3748;
+  --color-border-gray-tint: #4a5568;
+
+  --border-primary:      var(--color-border-gray);
+  --border-secondary:    #4b5563;
+  --border-subtle:       #374151;
+  --border-focus:        var(--color-secondary);
+  --border-disabled:     #2d3748;
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  7. STATE COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-success: #3aa337;
+  --color-success-rgb: 58, 163, 55;
+  --color-success-contrast: #000000;
+  --color-success-contrast-rgb: 0, 0, 0;
+  --color-success-shade: #338f30;
+  --color-success-tint: #4eac4b;
+  --color-success-light: #baf0b8;
+
+  --color-warning: #fdc520;
+  --color-warning-rgb: 253, 197, 32;
+  --color-warning-contrast: #000000;
+  --color-warning-contrast-rgb: 0, 0, 0;
+  --color-warning-shade: #dfad1c;
+  --color-warning-tint: #fdcb36;
+
+  --color-danger: #dc4040;
+  --color-danger-rgb: 220, 64, 64;
+  --color-danger-contrast: #ffffff;
+  --color-danger-contrast-rgb: 255, 255, 255;
+  --color-danger-shade: #c23838;
+  --color-danger-tint: #e05353;
+  --color-danger-light: #4a1a1a;
+
+  // ─── Soft/Light state variants (Dark) ───────────────────────────────────────
+
+  --color-success-soft:   rgba(58, 163, 55, 0.15);
+  --color-warning-soft:   rgba(253, 197, 32, 0.15);
+  --color-error-soft:     rgba(220, 64, 64, 0.15);
+  --color-info-soft:      rgba(41, 121, 255, 0.15);
+
+  --color-info:           var(--color-secondary);
+  --color-info-rgb:       var(--color-secondary-rgb);
+  --color-info-contrast:  var(--color-secondary-contrast);
+  --color-info-light:     var(--color-secondary-tint-light);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  8. ACTION COLORS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --action-hover-bg:      var(--surface-hover);
+  --action-active-bg:     var(--surface-active);
+  --action-pressed-bg:    #374151;
+  --action-selected-bg:   rgba(15, 76, 92, 0.3);
+  --action-focus-ring:    rgba(99, 102, 241, 0.4);
+  --action-disabled-bg:   var(--surface-disabled);
+  --action-disabled-text: var(--text-disabled);
+  --action-disabled-border: var(--border-disabled);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  9. SHADOWS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-shadow-gray: #000;
+  --color-shadow-gray-rgb: 0, 0, 0;
+  --color-shadow-gray-contrast: #ffffff;
+  --color-shadow-gray-contrast-rgb: 255, 255, 255;
+  --color-shadow-gray-shade: #000;
+  --color-shadow-gray-tint: #1a1a1c;
+
+  --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md:   0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg:   0 10px 15px rgba(0, 0, 0, 0.35);
+  --shadow-xl:   0 20px 25px rgba(0, 0, 0, 0.4);
+  --shadow-menu: 0 4px 20px rgba(0, 0, 0, 0.4);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  10. OVERLAYS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --overlay-backdrop:   rgba(0, 0, 0, 0.7);
+  --overlay-backdrop-light: rgba(0, 0, 0, 0.4);
+  --overlay-surface:    var(--surface-primary);
+  --overlay-modal-bg:   var(--surface-primary);
+  --overlay-drawer-bg:  var(--surface-primary);
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  11. GRADIENTS (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --bg-gradient-main: linear-gradient(#1a2332, #062023);
+  --gradient-primary: linear-gradient(135deg, #062023, #0d5e6a);
+  --gradient-overlay: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+
+  // ══════════════════════════════════════════════════════════════════════════════
+  //  12. CUSTOM / LEGACY (Dark)
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  --color-primary-to-white: #ffffff;
 }

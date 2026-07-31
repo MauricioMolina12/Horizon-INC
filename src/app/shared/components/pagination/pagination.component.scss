@@ -8,11 +8,11 @@
   border-radius: 0.75rem;
 
   font-size: 0.875rem;
-  color: #374151;
+  color: var(--text-primary, #374151);
 
   &-total {
     font-weight: 500;
-    color: #6b7280;
+    color: var(--text-secondary, #6b7280);
   }
 
   &-pages {
@@ -25,9 +25,9 @@
       width: 36px;
       height: 36px;
       border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
-      background-color: #ffffff;
-      color: #374151;
+      border: 1px solid var(--border-secondary, #e5e7eb);
+      background-color: var(--surface-primary, #ffffff);
+      color: var(--text-primary, #374151);
       cursor: pointer;
 
       display: flex;
@@ -38,8 +38,8 @@
         color 0.15s ease, transform 0.1s ease;
 
       &:hover:not(.disabled) {
-        background-color: #f3f4f6;
-        border-color: #d1d5db;
+        background-color: var(--surface-hover, #f3f4f6);
+        border-color: var(--border-primary, #d1d5db);
       }
 
       &:active:not(.disabled) {
@@ -67,19 +67,19 @@
         background-color: transparent;
 
         font-weight: 500;
-        color: #374151;
+        color: var(--text-primary, #374151);
         cursor: pointer;
 
         transition: background-color 0.15s ease, color 0.15s ease,
           box-shadow 0.15s ease;
 
         &:hover {
-          background-color: #f3f4f6;
+          background-color: var(--surface-hover, #f3f4f6);
         }
 
         &.active {
           background-color: var(--color-primary);
-          color: #ffffff;
+          color: var(--text-inverse, #ffffff);
         }
       }
     }

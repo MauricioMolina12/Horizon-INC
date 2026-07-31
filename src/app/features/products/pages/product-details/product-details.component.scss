@@ -12,7 +12,6 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    // animation: fadeIn 0.6s ease;
     padding-bottom: 20px;
 
     .title {
@@ -79,7 +78,6 @@
           align-items: center;
           justify-content: space-between;
           align-self: center;
-          // gap: 10px;
           border-radius: var(--border-radius);
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
@@ -90,7 +88,7 @@
           }
 
           &::-webkit-scrollbar-track {
-            background: #f0f0f0;
+            background: var(--surface-tertiary, #f0f0f0);
             border-radius: var(--border-radius);
           }
 
@@ -214,7 +212,6 @@
             align-items: center;
             gap: 25px;
             transition: all 0.5s ease;
-            // border-bottom: 1px solid var(--color-medium);
             scroll-behavior: smooth;
             white-space: nowrap;
             -ms-overflow-style: none;
@@ -396,7 +393,7 @@
           min-height: 30vh;
 
           &-group {
-            border: 1px solid var(--color-border, var(--color-medium));
+            border: 1px solid var(--border-primary, var(--color-medium));
             border-radius: var(--border-radius);
             overflow: hidden;
 
@@ -428,7 +425,7 @@
               .group-row {
                 display: flex;
                 padding: 0.7rem 1rem;
-                border-bottom: 1px solid var(--color-border, var(--color-medium));
+                border-bottom: 1px solid var(--border-primary, var(--color-medium));
                 font-size: 0.85rem;
 
                 &:last-child {
@@ -612,7 +609,6 @@
             flex-direction: column;
             gap: 10px;
             box-sizing: border-box;
-            // border-bottom: 1px solid var(--color-medium);
           }
         }
       }
@@ -684,7 +680,6 @@
         .product__images {
           width: calc(100% - 60%);
           max-height: 60vh;
-          // flex-direction: row-reverse;
 
           &--main {
             min-width: 80%;

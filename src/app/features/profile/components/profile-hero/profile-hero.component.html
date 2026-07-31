@@ -1,0 +1,41 @@
+<section class="hero" role="region" aria-label="Tu identidad">
+  @if (loading()) {
+    <div class="hero-skeleton" aria-hidden="true">
+      <div class="hero-skeleton__avatar"></div>
+      <div class="hero-skeleton__name"></div>
+      <div class="hero-skeleton__email"></div>
+    </div>
+  } @else if (user(); as u) {
+    <div class="hero__content">
+      <!-- Avatar -->
+      <div class="hero__avatar-wrapper"
+           (mouseenter)="showEditBtn.set(true)"
+           (mouseleave)="showEditBtn.set(false)">
+        <div class="hero__avatar" role="img" [attr.aria-label]="'Foto de perfil de ' + u.name">
+          @if (u.avatar) {
+            <img [src]="u.avatar" [alt]="u.name" class="hero__avatar-img" />
+          } @else {
+            <span class="hero__avatar-initial">{{ u.name.charAt(0) }}</span>
+          }
+        </div>
+        @if (showEditBtn()) {
+          <button class="hero__avatar-edit" (click)="avatarChange.emit()"
+                  aria-label="Cambiar foto de perfil">
+            <i class="ti ti-pencil"></i>
+          </button>
+        }
+      </div>
+
+      <h1 class="hero__name">{{ u.name }}</h1>
+      <p class="hero__email">{{ u.username }}</p>
+
+      <div class="hero__meta">
+        <span class="hero__meta-item">
+          <i class="ti ti-calendar"></i>
+          Cliente desde {{ u.createdAt | date:'MMM y' }}
+        </span>
+      </div>
+  
+    </div>
+  }
+</section>

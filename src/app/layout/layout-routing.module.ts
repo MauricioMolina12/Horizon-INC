@@ -12,11 +12,9 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('../features/home/home.module').then((m) => m.HomeModule),
+        loadChildren: () => import('../features/home/home.module').then((m) => m.HomeModule),
       },
 
-      // Ruta ubicada temporalmente
       {
         path: 'product/:slug',
         component: ProductDetailsComponent,
@@ -41,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         loadChildren: () => import('../features/profile/profile.module').then((m) => m.ProfileModule),
       },
       {

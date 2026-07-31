@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthUser, UserRole } from '../../shared/models/auth-user.model';
+import { User } from '../../shared/models/auth-user.model';
 
 /**
  * Auth credentials for login — extend as needed.
@@ -14,17 +14,9 @@ export interface AuthCredentials {
  * Standardised response from any auth provider.
  */
 export interface AuthResult {
-  user: AuthUser;
+  user: User;
   token: string;
 }
-
-/**
- * Contract that every auth backend must implement.
- *
- * Swap this provider to integrate an external auth frontend
- * (e.g. a micro-frontend, Amplify Hosted UI, or an OAuth redirect app)
- * without touching any consumer code.
- */
 export abstract class AuthProvider {
   /** Authenticate with credentials and return user + token. */
   abstract login(credentials: AuthCredentials): Observable<AuthResult>;
@@ -38,20 +30,8 @@ export abstract class AuthProvider {
    */
   abstract checkSession(): Observable<AuthResult | null>;
 
-  /** Return the current access / id token, or `null`. */
   abstract getToken(): string | null;
-
-  /** Mock-only: login as a specific role. Override in dev providers. */
-  mockLoginAs(role: UserRole): Observable<AuthResult> {
-    throw new Error('mockLoginAs is not supported by this provider');
-  }
 }
 
-/**
- * Injection token — use this in `providers` to bind a concrete implementation:
- *
- * ```ts
- * { provide: AUTH_PROVIDER, useClass: DefaultAuthProvider }
- * ```
- */
+
 export const AUTH_PROVIDER = new InjectionToken<AuthProvider>('AUTH_PROVIDER');

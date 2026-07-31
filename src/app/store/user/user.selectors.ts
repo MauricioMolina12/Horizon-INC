@@ -18,6 +18,11 @@ export const selectAuthLoading = createSelector(
   (state) => state.loading
 );
 
+export const selectAuthSaving = createSelector(
+  selectUserState,
+  (state) => state.saving
+)
+
 export const selectAuthLoaded = createSelector(
   selectUserState,
   (state) => state.loaded

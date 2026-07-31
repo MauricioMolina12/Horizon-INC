@@ -1,6 +1,6 @@
 .store-card-stats {
-  background: #fff;
-  border: 1px solid #eceef2;
+  background: var(--surface-primary, #fff);
+  border: 1px solid var(--border-secondary, #eceef2);
   border-radius: 14px;
   padding: 16px;
   display: flex;
@@ -9,12 +9,12 @@
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-md, 0 8px 20px rgba(0, 0, 0, 0.04));
   }
 
   &__header {
     font-size: 13px;
-    color: #6b7280;
+    color: var(--text-secondary, #6b7280);
     font-weight: 500;
   }
 
@@ -31,7 +31,7 @@
   &__value {
     font-size: 32px;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary, #111827);
     letter-spacing: -0.5px;
   }
 
@@ -40,18 +40,18 @@
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: #6b7280;
+    color: var(--text-secondary, #6b7280);
 
     .icon {
       font-size: 12px;
     }
 
     &--positive {
-      color: #059669;
+      color: var(--color-success, #059669);
     }
 
     &--negative {
-      color: #dc2626;
+      color: var(--color-danger, #dc2626);
     }
   }
 
@@ -81,8 +81,8 @@
       height: 2px;
       background: repeating-linear-gradient(
         to right,
-        #d1d5db,
-        #d1d5db 4px,
+        var(--border-primary, #d1d5db),
+        var(--border-primary, #d1d5db) 4px,
         transparent 4px,
         transparent 8px
       );

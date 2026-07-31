@@ -3,9 +3,9 @@
   width: 100%;
   min-height: 44px;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-primary, #d1d5db);
   border-radius: 0.5rem;
-  background-color: #ffffff;
+  background-color: var(--surface-primary, #ffffff);
   cursor: pointer;
   user-select: none;
 
@@ -18,18 +18,18 @@
 
   &:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    border-color: var(--color-secondary, #2563eb);
+    box-shadow: 0 0 0 3px var(--action-focus-ring, rgba(37, 99, 235, 0.15));
   }
 
   &.disabled {
-    background-color: #f3f4f6;
-    border-color: #e5e7eb;
-    color: #9ca3af;
+    background-color: var(--surface-disabled, #f3f4f6);
+    border-color: var(--border-disabled, #e5e7eb);
+    color: var(--text-disabled, #9ca3af);
     cursor: not-allowed;
 
     .combobox__icon {
-      color: #9ca3af;
+      color: var(--text-disabled, #9ca3af);
     }
   }
 }
@@ -42,18 +42,18 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 0.95rem;
-  color: #111827;
+  color: var(--text-primary, #111827);
 }
 
 .combobox__placeholder {
-  color: #9ca3af;
+  color: var(--text-disabled, #9ca3af);
 }
 
 
 
 .combobox__icon {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-secondary, #6b7280);
   pointer-events: none;
 }
 
@@ -68,11 +68,10 @@
   max-height: 240px;
   overflow-y: auto;
 
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  background-color: var(--surface-primary, #ffffff);
+  border: 1px solid var(--border-primary, #d1d5db);
   border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
 
   padding: 0.25rem 0;
 }
@@ -86,7 +85,7 @@
   border: none;
   text-align: left;
   font-size: 0.9rem;
-  color: #111827;
+  color: var(--text-primary, #111827);
   cursor: pointer;
 
   display: flex;
@@ -96,13 +95,13 @@
 
   &:hover,
   &:focus {
-    background-color: #eff6ff;
+    background-color: var(--bg-subtle, #eff6ff);
     outline: none;
   }
 
   &.active {
-    background-color: #2563eb;
-    color: #ffffff;
+    background-color: var(--color-secondary, #2563eb);
+    color: var(--text-inverse, #ffffff);
   }
 }
 
@@ -111,7 +110,7 @@
   padding: 0.75rem;
   text-align: center;
   font-size: 0.85rem;
-  color: #6b7280;
+  color: var(--text-secondary, #6b7280);
 }
 
 
@@ -121,7 +120,7 @@
 }
 
 .combobox__options::-webkit-scrollbar-thumb {
-  background-color: #cbd5f5;
+  background-color: var(--color-secondary-tint-light, #cbd5f5);
   border-radius: 4px;
 }
 

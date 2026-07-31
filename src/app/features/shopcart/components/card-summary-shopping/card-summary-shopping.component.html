@@ -20,7 +20,7 @@
                     <span class="summary__row--label">{{ item.label }}</span>
                     @if (item.label === 'Envío' && item.value === 'Gratis') {
                         <span class="summary__free-badge">
-                            <i class="icon icon-truck"></i> Gratis
+                            <i class="ti ti-truck"></i> Gratis
                         </span>
                     } @else if (item.label === 'Descuento' && couponApplied()) {
                         <span class="summary__discount-value">
@@ -58,7 +58,7 @@
             } @else {
                 <div class="summary__coupon--applied">
                     <div class="summary__coupon--applied-info">
-                        <i class="icon icon-percent_discount"></i>
+                        <i class="ti ti-discount"></i>
                         <span>Cupón <strong>{{ couponCode().toUpperCase() }}</strong> · 10% OFF</span>
                     </div>
                     <button class="summary__coupon--remove" (click)="removeCoupon()" aria-label="Quitar cupón">
@@ -75,12 +75,9 @@
             iconPosition="right"
             [text]="'Continuar con la compra'"
             aria-label="Ejecutar compra carrito de compras"
-            variant="solid"
-            [classCustom]="{
-                base: 'button',
-                bgColor: 'primary',
-                textColor: 'white',
-                more: ['rounded-lg', 'p-4', 'w-full']}">
+            variant="primary"
+            size="lg"
+            [fullWidth]="true">
         </app-button>
 
         <p class="summary__secure">

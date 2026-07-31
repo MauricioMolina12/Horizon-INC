@@ -1,68 +1,53 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'danger'
+  | 'success'
+  | 'link';
+
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
-    selector: 'app-button',
-    templateUrl: './button.component.html',
-    imports: [NgClass],
-    styleUrl: './button.component.scss'
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  imports: [NgClass],
+  styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  @Input() text!: string | number | null;
-  @Input() loading: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() text!: string;
+  @Input() loading = false;
+  @Input() disabled = false;
   @Input() icon?: string;
   @Input() iconPosition: 'left' | 'right' = 'left';
-  @Input() customClass: string | string[] = [];
-  @Input() variant: 'solid' | 'outline' | 'ghost' = 'solid';
-  @Input() classCustom: {
-    base?: string;
-    textColor?: string;
-    bgColor?: string;
-    more?: string[];
-  } = {};
+  @Input() variant: ButtonVariant = 'primary';
+  @Input() size: ButtonSize = 'md';
+  @Input() type: string = 'button';
+  @Input() fullWidth = false;
+  @Input() pill = false;
+  @Input() ariaLabel?: string;
 
-  @Input() type: string = '';
   @Output() clicked = new EventEmitter<void>();
 
-  onClick() {
-    if (!this.loading && !this.disabled) {
-      // this.loading = true;
-      this.clicked.emit();
-    }
+  get buttonClasses(): Record<string, boolean> {
+    return {
+      'holnex-btn': true,
+      [`variant-${this.variant}`]: true,
+      [`size-${this.size}`]: true,
+      'loading': this.loading,
+      'full-width': this.fullWidth,
+      'pill': this.pill,
+      'icon-only': !!this.icon && !this.text,
+    };
   }
 
-  get buttonClasses(): string[] {
-    const classes = [];
-
-    const base = this.classCustom.base || 'button';
-    classes.push(base);
-
-    const type =
-      this.variant === 'solid'
-        ? `button--${this.classCustom.bgColor || 'primary'}`
-        : `button--${this.variant}-${this.classCustom.bgColor || 'primary'}`;
-
-    classes.push(type);
-
-    // Icon-only
-    if (this.icon && !this.text) classes.push('button--icon-only');
-
-    // Estado loading
-    if (this.loading) classes.push('button--loading');
-
-    // Text color
-    if (this.classCustom.textColor) {
-      classes.push(`button--text-${this.classCustom.textColor}`);
+  onClick(): void {
+    if (!this.loading && !this.disabled) {
+      this.clicked.emit();
     }
-    
-    // Clases extra
-    if (this.classCustom.more) classes.push(...this.classCustom.more);
-    if (this.customClass) {
-      if (Array.isArray(this.customClass)) classes.push(...this.customClass);
-      else classes.push(this.customClass);
-    }
-
-    return classes;
   }
 }

@@ -6,9 +6,20 @@ import {
   checkSessionNoSession,
   checkSessionSuccess,
   clearAuthUser,
+  deleteAccount,
+  deleteAccountFailure,
+  deleteAccountSuccess,
+  getUserById,
+  getUserByIdFailure,
+  getUserByIdNotFound,
+  getUserByIdSuccess,
+  initSessionFromCookies,
   loadAuthUser,
   loadAuthUserFailure,
   loadAuthUserSuccess,
+  loadUserFromCache,
+  loadUserFromCacheFound,
+  loadUserFromCacheNotFound,
   login,
   loginFailure,
   loginSuccess,
@@ -26,10 +37,14 @@ export const initialUserState: UserState = {
   loading: false,
   loaded: false,
   error: null,
+  saving: false,
+  deleting: false
 };
 
 export const userReducer = createReducer(
   initialUserState,
+
+  on(initSessionFromCookies, (state) => ({ ...state, loading: true, error: null })),
 
   // ── Session check ──
   on(checkSession, (state) => ({ ...state, loading: true, error: null })),
@@ -40,6 +55,26 @@ export const userReducer = createReducer(
     ...state, loading: false, loaded: true, isAuthenticated: false,
   })),
   on(checkSessionFailure, (state, { error }) => ({
+    ...state, loading: false, loaded: true, error,
+  })),
+
+  on(loadUserFromCache, (state) => ({ ...state, loading: true, error: null })),
+  on(loadUserFromCacheFound, (state, { user }) => ({
+    ...state, user, isAuthenticated: true, loading: false, loaded: true, error: null,
+  })),
+  on(loadUserFromCacheNotFound, (state) => ({
+    ...state, loading: false, error: null,
+  })),
+
+
+  on(getUserById, (state) => ({ ...state, loading: true, error: null })),
+  on(getUserByIdSuccess, (state, { user }) => ({
+    ...state, user, isAuthenticated: true, loading: false, loaded: true, error: null,
+  })),
+  on(getUserByIdNotFound, (state) => ({
+    ...state, loading: false, loaded: true, isAuthenticated: false, user: null,
+  })),
+  on(getUserByIdFailure, (state, { error }) => ({
     ...state, loading: false, loaded: true, error,
   })),
 
@@ -54,18 +89,18 @@ export const userReducer = createReducer(
   on(logout, (state) => ({ ...state, loading: true })),
   on(logoutSuccess, () => ({ ...initialUserState, loaded: true })),
 
-  // ── Load user (profile fetch) ──
   on(loadAuthUser, (state) => ({ ...state, loading: true, error: null })),
   on(loadAuthUserSuccess, (state, { user }) => ({ ...state, loading: false, loaded: true, user })),
   on(loadAuthUserFailure, (state, { error }) => ({ ...state, loading: false, error })),
 
-  on(setAuthUser, (state, { user }) => ({ ...state, user, loaded: true })),
+  on(updateAuthUser,        (state)            => ({ ...state, saving: true, error: null })),
+  on(updateAuthUserSuccess, (state, { user })  => ({ ...state, saving: false, user: { ...state.user, ...user }, error: null })),
+  on(updateAuthUserFailure, (state, { error }) => ({ ...state, saving: false, error })),
+  on(setAuthUser,           (state, { user })  => ({ ...state, user: { ...state.user, ...user }, loaded: true, error: null })),
 
-  // ── Update user ──
-  on(updateAuthUser, (state) => ({ ...state, loading: true, error: null })),
-  on(updateAuthUserSuccess, (state, { user }) => ({ ...state, loading: false, user })),
-  on(updateAuthUserFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(deleteAccount, (state) => ({ ...state, deleting: true, error: null })),
+  on(deleteAccountSuccess, () => initialUserState),
+  on(deleteAccountFailure, (state, { error }) => ({ ...state, deleting: false, error })),
 
-  // ── Clear ──
   on(clearAuthUser, () => initialUserState),
 );

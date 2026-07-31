@@ -8,11 +8,6 @@ const routes: Routes = [
       import('../app/layout/layout.module').then((home) => home.LayoutModule),
   },
   {
-    path: 'user',
-    loadChildren: () =>
-      import('../app/features/auth/auth.module').then((user) => user.AuthModule),
-  },
-  {
     path: '**', 
     redirectTo: '', 
     pathMatch: 'full',

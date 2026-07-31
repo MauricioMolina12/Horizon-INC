@@ -1,0 +1,86 @@
+<section class="settings" role="region" aria-label="Configuración">
+  <div class="section-header">
+    <h2 class="section-title">Configuración de cuenta</h2>
+    <span class="section-subtitle">Administra tu cuenta y preferencias</span>
+  </div>
+
+  <div class="settings__accordion">
+    @for (section of sections; track section.id) {
+
+    <app-accordion [accordionId]="section.id" [icon]="section.icon" [title]="section.title"
+      [description]="section.description" [variant]="section.danger ? 'danger' : 'normal'"
+      [isOpen]="openSectionId() === section.id" (openChange)="onAccordionToggle(section.id, $event)">
+
+      <!-- ═══ ACCOUNT SECTION ═══ -->
+      @if (section.id === 'account') {
+      <form [formGroup]="accountForm" class="settings__form">
+        <div class="settings__field">
+          <label class="settings__field-label" for="name">Nombre</label>
+          <app-input id="name" type="name" formControlName="name" placeholder="Tu nombre">
+          </app-input>
+        </div>
+
+        @if (accountForm.get('name')?.invalid && accountForm.get('name')?.touched) {
+        <span class="settings__field-error">El nombre debe tener al menos 2 caracteres</span>
+        }
+
+        <div class="settings__field">
+          <label class="settings__field-label" for="username">Usuario</label>
+          <app-input id="username" type="username" formControlName="username" placeholder="Tu usuario">
+          </app-input>
+        </div>
+
+        @if (accountForm.get('username')?.invalid && accountForm.get('username')?.touched) {
+        <span class="settings__field-error">Ingresa un usuario válido</span>
+        }
+
+        <div class="settings__field">
+          <label class="settings__field-label" for="phone">Teléfono</label>
+          <app-input id="phone" type="tel" formControlName="phone" placeholder="+52 55 1234 5678">
+          </app-input>
+        </div>
+
+        @if (saveError()) {
+        <div class="settings__message settings__message--error">
+          <i class="ti ti-alert-circle"></i>
+          {{ saveError() }}
+        </div>
+        }
+
+        @if (saveSuccess()) {
+        <div class="settings__message settings__message--success">
+          <i class="ti ti-check-circle"></i>
+          Cambios guardados correctamente
+        </div>
+        }
+
+        <div class="settings__actions">
+          <app-button (clicked)="saveAccount()" [text]="saving() ? 'Guardando...' : 'Guardar cambios'"
+            [loading]="saving()" [disabled]="!hasChanges() || saving()">
+          </app-button>
+        </div>
+      </form>
+      }
+
+      <!-- ═══ DANGER ZONE ═══ -->
+      @if (section.id === 'danger') {
+      <div class="settings__danger-zone">
+        <div class="settings__danger-zone--item delete_account">
+          <div class="settings__danger-zone--item__left">
+            <h2 class="title">Eliminar cuenta</h2>
+            <span class="subtitle">Este cambio es irreversible</span>
+          </div>
+          <div class="settings__danger-zone--item__action">
+            <app-button (clicked)="deleteAccount()"
+              [text]="deletingAccount() ? 'Eliminando cuenta...' : 'Eliminar cuenta'" [loading]="deletingAccount()"
+              [disabled]="deletingAccount()" [variant]="'danger'" [size]="'sm'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+      }
+
+    </app-accordion>
+    }
+  </div>
+</section>

@@ -4,7 +4,7 @@
   <aside class="search__sidebar" [class.open]="showMobileFilters()">
     <header class="search__sidebar-header">
       <h3 class="search__sidebar-title">
-        <i class="icon-funnel"></i>
+        <i class="ti ti-adjustments-horizontal"></i>
         Filtros
       </h3>
       @if (searchFacade.hasActiveFilters()) {
@@ -52,7 +52,7 @@
           (change)="searchFacade.toggleFreeShipping()"
         />
         <span>
-          <i class="icon-truck"></i>
+          <i class="ti ti-truck"></i>
           Envío gratis
         </span>
       </label>
@@ -84,7 +84,7 @@
 
       <div class="search__topbar-actions">
         <button class="search__filter-btn" (click)="toggleMobileFilters()">
-          <i class="icon-funnel"></i>
+          <i class="ti ti-adjustments-horizontal"></i>
           Filtros
           @if (searchFacade.activeFilterCount() > 0) {
             <span class="search__filter-badge">{{ searchFacade.activeFilterCount() }}</span>
@@ -136,7 +136,7 @@
     <!-- ── EMPTY ── -->
     @if (!searchFacade.loading() && !searchFacade.error() && searchFacade.totalResults() === 0) {
       <div class="search__empty">
-        <i class="icon-search1 search__empty-icon"></i>
+        <i class="ti ti-search search__empty-icon"></i>
         <h2 class="search__empty-title">No encontramos resultados</h2>
         <p class="search__empty-text">
           Intenta con otros términos de búsqueda o ajusta los filtros.

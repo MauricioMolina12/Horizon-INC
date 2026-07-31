@@ -241,7 +241,7 @@
           }
           <app-button (clicked)="r.success ? goHome() : goToStep(1)"
             [text]="r.success ? 'Volver al inicio' : 'Intentar de nuevo'"
-            [classCustom]="{base: 'button', bgColor: 'primary', textColor: 'white', more: ['p-4','rounded-lg','mt-4']}">
+            variant="primary" size="md" class="mt-4">
           </app-button>
         </div>
         } @else if (error(); as err) {
@@ -249,8 +249,7 @@
           <i class="icon-info result-card__icon"></i>
           <h2 class="result-card__title">Error</h2>
           <p class="result-card__message">{{ err }}</p>
-          <app-button (clicked)="goToStep(2)" [text]="'Volver'"
-            [classCustom]="{base: 'button', bgColor: 'primary', textColor: 'white', more: ['p-4','rounded-lg','mt-4']}">
+          <app-button (clicked)="goToStep(2)" [text]="'Volver'" variant="primary" size="md">
           </app-button>
         </div>
         }
@@ -312,11 +311,11 @@
 
         @if (step() === 1) {
         <app-button (clicked)="goToStep(2)" [text]="'Continuar'" [disabled]="!canContinue()"
-          [classCustom]="{base: 'button', bgColor: 'primary', textColor: 'white', more: ['w-full','p-4','rounded-lg','mt-4']}">
+          variant="primary" size="lg" [fullWidth]="true">
         </app-button>
         } @else if (step() === 2) {
         <app-button (clicked)="confirmPayment()" [text]="'Pagar'" [loading]="processing()"
-          [classCustom]="{base: 'button', bgColor: 'primary', textColor: 'white', more: ['w-full','p-4','rounded-lg','mt-4']}">
+          variant="primary" size="lg" [fullWidth]="true">
         </app-button>
         }
       </div>

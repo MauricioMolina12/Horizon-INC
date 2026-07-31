@@ -206,7 +206,7 @@
 
 /* Background */
 .bg-white {
-  background-color: #fff !important;
+  background-color: var(--surface-primary, #fff) !important;
 }
 .bg-black {
   background-color: #000 !important;

@@ -5,9 +5,8 @@
     <app-hero-banner [slider]="ads"></app-hero-banner>
   </section>
 
-  <main class="home__main">
+  <!-- <main class="home__main">
 
-    <!-- Productos recientes -->
     <section class="home__section home__section--recent">
       <app-products-grid [title]="'Inspirado en lo último que viste'" [products]="productsSignal()"
         [loading]="loadingSignal()" [error]="errorSignal()" [labelButton]="'Descubre más'">
@@ -26,12 +25,10 @@
       </app-products-grid>
     </section>
 
-    <!-- Suscripción a newsletter -->
     <section class="home__section home__section--newsletter">
       <app-newsletter-subscription></app-newsletter-subscription>
     </section>
 
-    <!-- Ofertas -->
     <section class="home__section home__section--offers">
       <app-slider-products [title]="'Ofertas'" [typeSlider]="sliderType.flashSale" [products]="productsSignal()"
         [loading]="loadingSignal()">
@@ -49,10 +46,5 @@
       <app-categories-list></app-categories-list>
     </section>
 
-    <!-- Servicios -->
-    <!-- <section class="home__section home__section--services">
-      <app-services-grid></app-services-grid>
-    </section> -->
-
-  </main>
+  </main> -->
 </div>

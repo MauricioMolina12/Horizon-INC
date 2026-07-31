@@ -1,19 +1,39 @@
 .profile-layout {
-  min-height: calc(100vh - 80px);
   display: flex;
-  flex-direction: column;
-  width: 1200px;
-  max-width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 1.5rem 0;
+  gap: 40px;
+  align-items: start;
+  padding: 32px 24px;
+  min-height: calc(100vh - 80px);
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+
+    .profile__hero {
+      flex: 0;
+      width: 100%;
+
+      app-profile-hero::ng-deep {
+        width: 100%;
+        .hero {
+          width: 100%;
+        }
+      }
+    }
+
+    .profile__settings {
+      width: 100%;
+    }
+  }
 }
 
-.profile-main {
+.profile__hero {
+  min-width: 0;
   flex: 1;
-  padding: inherit;
+}
 
-  @media (max-width: 600px) {
-    padding: 20px 16px;
-  }
+.profile__settings {
+  min-width: 0;
+  flex: 3;
 }

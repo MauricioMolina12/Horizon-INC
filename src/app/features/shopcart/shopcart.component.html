@@ -16,7 +16,7 @@
           </h1>
           @if (cartProducts().length > 0) {
             <button class="cart-header__clear" (click)="clearCart()">
-              <i class="icon icon-delete"></i>
+              <i class="ti ti-trash"></i>
               Vaciar carrito
             </button>
           }
@@ -26,15 +26,15 @@
       <!-- Benefits strip -->
       <div class="benefits-strip">
         <div class="benefits-strip__item">
-          <i class="icon icon-truck"></i>
+          <i class="ti ti-truck"></i>
           <span>Envío gratis desde $100</span>
         </div>
         <div class="benefits-strip__item">
-          <i class="icon icon-box"></i>
+          <i class="ti ti-box"></i>
           <span>Devolución en 30 días</span>
         </div>
         <div class="benefits-strip__item">
-          <i class="icon icon-lock"></i>
+          <i class="ti ti-lock"></i>
           <span>Pago 100% seguro</span>
         </div>
       </div>
@@ -49,7 +49,7 @@
           </label>
           @if (selectedCount() > 0) {
             <button class="selection-bar__delete" (click)="removeSelected()">
-              <i class="icon icon-delete"></i>
+              <i class="ti ti-trash"></i>
               Eliminar ({{ selectedCount() }})
             </button>
           }
@@ -76,7 +76,7 @@
           <p class="description text-sm">Agrega productos a tu carrito para verlos aquí.</p>
           <a class="CTA text-sm flex items-center gap-1" href="">
             Descubrir productos
-            <i class="icon icon-arrow-right"></i>
+            <i class="ti ti-arrow-right"></i>
           </a>
         </div>
       }

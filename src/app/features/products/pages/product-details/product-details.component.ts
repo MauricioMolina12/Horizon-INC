@@ -117,16 +117,16 @@ export class ProductDetailsComponent
   ];
 
   shipping: shipping[] = [
-    { label: 'Descuento', value: '50%', icon: 'icon-percent_discount' },
-    { label: 'Paquete', value: 'Paquete regular', icon: 'icon-box' },
-    { label: 'Tiempo de entrega', value: '3-4 días hábiles', icon: 'icon-calendar' },
-    { label: 'Tiempo estimado', value: '10 - 12 Octubre 2026', icon: 'icon-truck' },
+    { label: 'Descuento', value: '50%', icon: 'ti ti-discount' },
+    { label: 'Paquete', value: 'Paquete regular', icon: 'ti ti-box' },
+    { label: 'Tiempo de entrega', value: '3-4 días hábiles', icon: 'ti ti-calendar' },
+    { label: 'Tiempo estimado', value: '10 - 12 Octubre 2026', icon: 'ti ti-truck' },
   ];
 
   featureGroups: ProductFeatureGroup[] = [
     {
       title: 'Detalles generales',
-      icon: 'icon-info',
+      icon: 'ti ti-info-circle',
       features: [
         { label: 'Marca', value: 'Holnex' },
         { label: 'Modelo', value: 'HX-2026 Pro' },
@@ -137,7 +137,7 @@ export class ProductDetailsComponent
     },
     {
       title: 'Dimensiones y peso',
-      icon: 'icon-weight',
+      icon: 'ti ti-weight',
       features: [
         { label: 'Peso', value: '350 g' },
         { label: 'Alto', value: '25 cm' },
@@ -147,7 +147,7 @@ export class ProductDetailsComponent
     },
     {
       title: 'Material y composición',
-      icon: 'icon-layers',
+      icon: 'ti ti-layers',
       features: [
         { label: 'Material principal', value: 'Algodón orgánico 100%' },
         { label: 'Forro', value: 'Poliéster reciclado' },

@@ -2,7 +2,8 @@ import { Injectable, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class GlobalLoaderService {
-  private _visible = signal(false);
+  
+  private _visible = signal(true);
   isVisible = this._visible.asReadonly();
 
   show() {

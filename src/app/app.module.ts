@@ -6,9 +6,8 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DropdownCountriesComponent } from './features/auth/components/dropdown-countries/dropdown-countries.component';
-import { HttpClientModule } from '@angular/common/http';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, HTTP_INTERCEPTORS, withInterceptorsFromDi } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { LayoutComponent } from './layout/layout.component';
 import { PromoBannerComponent } from './layout/components/promo-banner/promo-banner.component';
 import { FiltersComponent } from './shared/components/ui/filters/filters.component';
@@ -31,16 +30,15 @@ import { favoritesReducer } from './features/favorites/store/favorites.reducer';
 import { FavoritesEffects } from './features/favorites/store/favorites.effects';
 
 // Auth provider
-import { AUTH_PROVIDER } from './core/auth/auth-provider';
-import { DefaultAuthProvider } from './core/auth/default-auth.provider';
+import { AUTH_PROVIDER, SessionAuthProvider } from './core/auth';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { AccordionComponent } from './shared/components/accordion/accordion.component';
 
 @NgModule({
-  declarations: [AppComponent, DropdownCountriesComponent, LayoutComponent, GlobalLoaderComponent, SearchBarComponent, ModalComponent, ShareComponent],
+  declarations: [AppComponent, LayoutComponent, GlobalLoaderComponent, SearchBarComponent, ModalComponent, ShareComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     PromoBannerComponent,
     FiltersComponent,
     CategoryDetailsComponent,
@@ -58,8 +56,9 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
   exports: [TooltipDirective],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch()),
-    { provide: AUTH_PROVIDER, useClass: DefaultAuthProvider },
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: AUTH_PROVIDER, useClass: SessionAuthProvider },
   ],
   bootstrap: [AppComponent],
 })

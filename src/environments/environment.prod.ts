@@ -1,6 +1,6 @@
 export const environment = {
-    production: true,   
-    apiUrl: 'https://holnex.com',
-    authToken: 'prod-token'  
-  };
-  
+  production: true,
+  BASE_URL: 'https://api.holnex.com/core',
+  mainDomain: 'https://holnex.com',
+  authDomain: 'https://auth.holnex.com',
+};

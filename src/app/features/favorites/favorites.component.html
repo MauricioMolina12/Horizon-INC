@@ -31,7 +31,7 @@
   @if (!loading() && !error() && count() === 0) {
     <article class="favorites__empty">
       <div class="favorites__empty-content">
-        <i class="icon-heart favorites__empty-icon"></i>
+        <i class="ti ti-heart favorites__empty-icon"></i>
         <h2 class="favorites__empty-title">Aún no tienes favoritos</h2>
         <p class="favorites__empty-text">
           Explora nuestros productos y agrega los que más te gusten a tu lista de favoritos.
@@ -39,12 +39,7 @@
         <app-button
           [text]="'Explorar productos'"
           (clicked)="goToHome()"
-          [classCustom]="{
-            base: 'button',
-            bgColor: 'primary',
-            textColor: 'white',
-            more: ['rounded-lg', 'p-4', 'mt-4']
-          }">
+          variant="primary" size="lg">
         </app-button>
       </div>
     </article>
@@ -60,7 +55,7 @@
               (productClick)="goToProduct(product)">
             </app-product-card>
             <button class="favorites__remove" (click)="removeFavorite(product)" aria-label="Eliminar de favoritos">
-              <i class="icon-trash"></i>
+              <i class="ti ti-trash"></i>
               <span>Eliminar</span>
             </button>
           </div>

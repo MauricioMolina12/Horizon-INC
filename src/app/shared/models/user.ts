@@ -1,15 +1,24 @@
+export type UserRole = 'buyer' | 'seller' | 'admin';
+
 export interface User {
-    id: string;
-    cellphone: string;
-    country_id: string;
-    created_at: string;
-    email: string;
-    image: string;
-    language_id: string;
-    name: string;
-    password: string;
-    role: string;
-    source: string;
-    address: string;
-  }
-  
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  avatar: string | null;
+  role: UserRole;
+  countryId: string;
+  address: string;
+  createdAt: string;
+}
+
+export interface UserState {
+  user: User | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  loaded: boolean;
+  error: string | null;
+  saving: boolean;
+  deleting: boolean;
+}

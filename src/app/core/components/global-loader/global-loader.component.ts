@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { GlobalLoaderService } from '../../services/global-loader.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { GlobalLoaderService } from '../../services/global-loader.service';
     template: `
     @if (isVisible()) {
       <div class="global-loader">
-        <iframe src="assets/logo-holnex.svg"></iframe>
+        <img src="assets/logo-holnex.svg" alt="Holnex">
       </div>
     }
     `,

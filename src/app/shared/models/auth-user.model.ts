@@ -1,8 +1,9 @@
 export type UserRole = 'buyer' | 'seller' | 'admin';
 
-export interface AuthUser {
+export interface User {
   id: string;
   name: string;
+  username: string;
   email: string;
   phone: string;
   avatar: string | null;
@@ -13,9 +14,11 @@ export interface AuthUser {
 }
 
 export interface UserState {
-  user: AuthUser | null;
+  user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
   loaded: boolean;
   error: string | null;
+  saving: boolean;
+  deleting: boolean;
 }

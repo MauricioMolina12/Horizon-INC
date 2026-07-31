@@ -2,6 +2,9 @@ import { Injectable, signal } from '@angular/core';
 import { catchError, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+
+const API_URL = 'https://api.escuelajs.co/api/v1';
+
 import { Category, productsPerCategory } from '../models/categories';
 
 @Injectable({
@@ -18,7 +21,7 @@ export class CategoriesService {
 
   getAllCategories(): void {
     this.http
-      .get<any[]>(environment.api + '/categories')
+      .get<any[]>(API_URL + '/categories')
       .pipe(
         map((response) =>
           response.map((category, index) => ({
@@ -48,7 +51,7 @@ export class CategoriesService {
     }
 
     this.http
-      .get<any>(environment.api + `/categories/slug/${slug}`)
+      .get<any>(API_URL + `/categories/slug/${slug}`)
       .pipe(
         map((category: Category) => ({
           id: category.id,
@@ -69,7 +72,7 @@ export class CategoriesService {
 
   getProductsPerCategory(id: number) {
     this.http
-      .get<productsPerCategory[]>(`${environment.api}/categories/${id}/products`)
+      .get<productsPerCategory[]>(`${API_URL}/categories/${id}/products`)
       .pipe(
         map((response) =>
           response.map((product: productsPerCategory) => ({

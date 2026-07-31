@@ -6,6 +6,7 @@ import { NavBarComponent } from '../layout/components/nav-bar/nav-bar.component'
 import { FooterComponent } from '../layout/components/footer/footer.component';
 import { NotificationsModule } from '../features/notifications/notifications.module';
 import { ClickOutsideDirective } from '../shared/directives/click-outside.directive';
+import { TruncateUsername } from '../shared/pipes/shared.pipe';
 
 
 
@@ -19,7 +20,8 @@ import { ClickOutsideDirective } from '../shared/directives/click-outside.direct
     RouterModule,
     SearchInputComponent,
     NotificationsModule,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    TruncateUsername
   ],
   exports: [
     NavBarComponent,

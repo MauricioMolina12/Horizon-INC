@@ -1,68 +1,42 @@
-.share {
-  padding: 1.5rem;
+:host {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+}
 
-  &__header {
+.share {
+  &__url {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
+    gap: 8px;
 
-  &__title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 0;
-  }
-
-  &__product-name {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--background-color2);
-    border-radius: var(--border-radius);
-    padding: 0.5rem 0.75rem;
-    overflow: hidden;
-
-    &--url {
+    input {
       flex: 1;
-      font-size: 0.78rem;
-      color: var(--color-text-secondary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border-secondary, #e5e7eb);
+      border-radius: var(--border-radius);
+      font-size: 0.8rem;
+      font-family: inherit;
+      outline: none;
+      background: var(--surface-primary);
+      color: var(--text-primary);
+
+      &:focus {
+        border-color: var(--color-secondary);
+      }
     }
 
-    &--copy-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.4rem 0.85rem;
+    button {
+      padding: 0.85rem 1rem;
       background: var(--color-primary);
-      color: #fff;
+      color: var(--text-inverse, #fff);
       border: none;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      font-weight: 600;
+      border-radius: var(--border-radius);
       cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s ease;
-      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 0.8rem;
 
       &:hover {
-        background: var(--color-secondary-shade);
+        background: var(--color-primary-shade);
       }
     }
   }
@@ -70,70 +44,69 @@
   &__networks {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 8px;
   }
 
   &__network {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.85rem 1rem;
-    border: 1.5px solid var(--color-border, #e5e7eb);
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-secondary, #e5e7eb);
     border-radius: var(--border-radius);
-    background: transparent;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-    font-family: var(--font-family);
-
-    &:hover {
-      transform: translateX(3px);
-    }
+    transition: all 0.2s ease;
+    background: var(--surface-primary);
 
     &--icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+      font-size: 1.2rem;
       flex-shrink: 0;
     }
 
-    &--label {
+    &--name {
       font-size: 0.9rem;
-      font-weight: 200;
-      color: var(--color-text);
+      font-weight: 500;
+      color: var(--text-primary);
     }
 
-    &--whatsapp {
+    // WhatsApp
+    &.whatsapp {
       .share__network--icon {
-        background: #e8faf0;
+        background: var(--color-success-soft, #e8faf0);
         color: #25d366;
       }
       &:hover {
-        background: #f0fdf6;
+        background: var(--color-success-soft, #f0fdf6);
         border-color: #25d366;
       }
     }
 
-    &--twitter {
+    // Copy link
+    &.copy-link {
       .share__network--icon {
-        background: #f1f5f9;
-        color: #000;
+        background: var(--bg-subtle, #f1f5f9);
+        color: var(--text-primary, #000);
       }
       &:hover {
-        background: #f8fafc;
-        border-color: #000;
+        background: var(--surface-hover, #f8fafc);
+        border-color: var(--text-primary, #000);
       }
     }
 
-    &--instagram {
+    // Instagram
+    &.instagram {
       .share__network--icon {
-        background: #fdf2f8;
+        background: var(--color-error-soft, #fdf2f8);
         color: #e1306c;
       }
       &:hover {
-        background: #fdf2f8;
+        background: var(--color-error-soft, #fdf2f8);
         border-color: #e1306c;
       }
     }

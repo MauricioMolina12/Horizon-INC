@@ -8,16 +8,7 @@
       }
       @if (status.actionLabel && !status.options?.isOnline) {
         <app-button [text]="status.actionLabel" aria-label="Recargar app"
-                [classCustom]="{
-                    base: 'button',
-                    bgColor: 'light',
-                    textColor: 'danger',
-                    more: [
-                    'p-absolute',
-                    'right-10',
-                    'top-25p'
-                    ]
-                }" (clicked)="action.emit(status.actionType || 'retry')">
+                variant="outline" size="sm" (clicked)="action.emit(status.actionType || 'retry')">
         </app-button>
       }
     </section>

@@ -1,7 +1,7 @@
 <div class="input-wrapper">
     <input class="input-search" enterkeyhint="search" type="text" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()"
         placeholder="¿Que deseas comprar hoy?">
-    <i class="input-icon icon-search"></i>
+    <i class="input-icon ti ti-search"></i>
     <div class="input-icon-xmark icon-xmark" (click)="closeWrapperFunction()">
         <div class="line-xmark"></div>
         <div class="line-xmark"></div>
@@ -10,7 +10,7 @@
         <h2 class="input-recent-searches-title">Busquedas recientes</h2>
         <ul class="input-recent-searches-list">
             <li class="input-recent-searches-list-item" *ngFor="let search of [1,2,3,4,5,6,7,8]">
-                <i class="icon-history"></i>
+                <i class="ti ti-history"></i>
                 <span class="item__text-search">Computador HP 32GB RAM 1TB SSD</span>
             </li>
         </ul>

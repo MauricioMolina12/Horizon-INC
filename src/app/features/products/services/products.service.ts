@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+
+const API_URL = 'https://api.escuelajs.co/api/v1';
 import { Router } from '@angular/router';
 import { Product } from '../../../features/products/models/products.model';
 import { Store } from '@ngrx/store';
@@ -37,7 +39,7 @@ export class ProductsService {
    * Fetches all products and updates the signal
    */
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(environment.api + '/products').pipe(
+    return this.http.get<Product[]>(API_URL + '/products').pipe(
       catchError((error) => {
         console.error('ProductsService.getAllProducts() error:', error);
         return throwError(() => error);
@@ -51,7 +53,7 @@ export class ProductsService {
    */
   getProductBySlug(slug: string): Observable<Product> {
     return this.http
-      .get<Product>(`${environment.api + '/products/slug/'}${slug}`)
+      .get<Product>(`${API_URL + '/products/slug/'}${slug}`)
       .pipe(
         catchError((error) => {
           console.error(`Error loading product ${slug}:`, error);

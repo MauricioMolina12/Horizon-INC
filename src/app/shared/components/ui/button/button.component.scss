@@ -1,46 +1,418 @@
-button {
-  .icon-left,
-  .icon-right,
-  .description {
-    display: none;
-    white-space: nowrap;
-    font-weight: 300;
+:host{
+  width: 100%;
+  height: 100%;
+}
 
-    &.active {
-      display: block;
-    }
+button.holnex-btn {
+  /* --- Base Reset --- */
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: middle;
 
-    &::before {
-      color: inherit;
+  /* --- Typography --- */
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  width: 100%;
+  padding: 15px;
+
+  min-height: 40px;
+
+  /* --- Sizing Presets --- */
+  &.size-sm {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.7rem;
+    border-radius: 6px;
+    gap: 0.3rem;
+  }
+
+  &.size-md {
+    padding: 0.5625rem 1.125rem;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    gap: 0.5rem;
+  }
+
+  &.size-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    border-radius: 10px;
+    gap: 0.625rem;
+  }
+
+  /* --- Full Width --- */
+  &.full-width {
+    width: 100%;
+  }
+
+  /* --- Pill Shape --- */
+  &.pill {
+    border-radius: 9999px !important;
+  }
+
+  /* --- Core Transitions --- */
+  --btn-transition-duration: 200ms;
+  --btn-easing: cubic-bezier(0.16, 1, 0.3, 1);
+
+  transition:
+    background-color var(--btn-transition-duration) var(--btn-easing),
+    color var(--btn-transition-duration) var(--btn-easing),
+    border-color var(--btn-transition-duration) var(--btn-easing),
+    box-shadow var(--btn-transition-duration) var(--btn-easing),
+    transform var(--btn-transition-duration) var(--btn-easing),
+    opacity var(--btn-transition-duration) var(--btn-easing);
+}
+
+/* =============================================
+   VARIANT: PRIMARY
+   ============================================= */
+button.holnex-btn.variant-primary {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+  border: 1px solid transparent;
+
+  box-shadow:
+    0 1px 2px rgba(15, 76, 92, 0.08),
+    0 1px 3px rgba(15, 76, 92, 0.04);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-shade);
+    box-shadow:
+      0 4px 8px rgba(15, 76, 92, 0.12),
+      0 2px 4px rgba(15, 76, 92, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--color-primary-secondary);
+    box-shadow:
+      0 1px 2px rgba(15, 76, 92, 0.08);
+    transform: translateY(0px);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* =============================================
+   VARIANT: SECONDARY
+   ============================================= */
+button.holnex-btn.variant-secondary {
+  background-color: var(--surface-secondary);
+  color: #1f2937;
+  border: 1px solid var(--border-secondary);
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04);
+
+  &:hover:not(:disabled) {
+    background-color: var(--surface-active);
+    border-color: var(--border-primary);
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.06),
+      0 2px 4px rgba(0, 0, 0, 0.04);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--action-pressed-bg);
+    border-color: #9ca3af;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transform: translateY(0px);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #6b7280;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* =============================================
+   VARIANT: OUTLINE
+   ============================================= */
+button.holnex-btn.variant-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--action-selected-bg);
+    border-color: var(--color-primary-shade);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: rgba(15, 76, 92, 0.12);
+    transform: translateY(0px);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+/* =============================================
+   VARIANT: GHOST
+   ============================================= */
+button.holnex-btn.variant-ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid transparent;
+
+  &:hover:not(:disabled) {
+    background-color: var(--action-selected-bg);
+  }
+
+  &:active:not(:disabled) {
+    background-color: rgba(15, 76, 92, 0.12);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+/* =============================================
+   VARIANT: DANGER
+   ============================================= */
+button.holnex-btn.variant-danger {
+  background-color: var(--color-danger);
+  color: var(--text-inverse);
+  border: 1px solid transparent;
+
+  box-shadow:
+    0 1px 2px rgba(220, 38, 38, 0.08),
+    0 1px 3px rgba(220, 38, 38, 0.04);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-danger-shade);
+    box-shadow:
+      0 4px 8px rgba(220, 38, 38, 0.12),
+      0 2px 4px rgba(220, 38, 38, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: #991b1b;
+    box-shadow:
+      0 1px 2px rgba(220, 38, 38, 0.08);
+    transform: translateY(0px);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-danger);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* =============================================
+   VARIANT: SUCCESS
+   ============================================= */
+button.holnex-btn.variant-success {
+  background-color: var(--color-success);
+  color: var(--text-inverse);
+  border: 1px solid transparent;
+
+  box-shadow:
+    0 1px 2px rgba(5, 150, 105, 0.08),
+    0 1px 3px rgba(5, 150, 105, 0.04);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-success-shade);
+    box-shadow:
+      0 4px 8px rgba(5, 150, 105, 0.12),
+      0 2px 4px rgba(5, 150, 105, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: #065f46;
+    box-shadow:
+      0 1px 2px rgba(5, 150, 105, 0.08);
+    transform: translateY(0px);
+    transition-duration: 50ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-success);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* =============================================
+   VARIANT: LINK
+   ============================================= */
+button.holnex-btn.variant-link {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: none;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--color-primary);
+    transition: width 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover:not(:disabled) {
+    &::after {
+      width: 100%;
     }
   }
 
-  .icon-left,
-  .icon-right {
-    font-size: 1rem;
-    margin: 0 0.5rem;
+  &:active:not(:disabled) {
+    opacity: 0.7;
+    transition-duration: 50ms;
   }
 
-  .spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(139, 139, 139, 0.3);
-    border-top: 2px solid #2292a4;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-    display: none;
-
-    &.loading {
-      display: block;
-    }
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 2px;
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0);
-    }
-    100% {
-      transform: rotate(360deg);
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+/* =============================================
+   LOADING STATE
+   ============================================= */
+button.holnex-btn.loading {
+  cursor: wait;
+  pointer-events: none;
+  position: relative;
+
+  .btn-text,
+  .btn-icon {
+    opacity: 0;
+  }
+}
+
+.btn-spinner {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =============================================
+   ICON & TEXT HELPERS
+   ============================================= */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em;
+  line-height: 0;
+  flex-shrink: 0;
+}
+
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+/* Icon-only: square proportion */
+button.holnex-btn.icon-only {
+  padding: 0.5rem;
+  aspect-ratio: 1;
+  justify-content: center;
+
+  &.size-sm {
+    padding: 0.3125rem;
+  }
+
+  &.size-md {
+    padding: 0.5rem;
+  }
+
+  &.size-lg {
+    padding: 0.625rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 640px) {
+  button.holnex-btn {
+    &.size-lg {
+      padding: 0.625rem 1.25rem;
+      font-size: 0.875rem;
     }
   }
 }

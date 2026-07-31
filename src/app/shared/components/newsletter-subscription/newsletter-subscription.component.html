@@ -7,21 +7,9 @@
         <span class="newsletter-description">Ingresa tu correo y escucharemos sus necesidades, identificaremos el mejor
             enfoque y luego crearemos una solución adecuada para usted.</span>
         <form class="newsletter-form">
-            <i class="newsletter-form-icon__email icon-search"></i>
+            <i class="newsletter-form-icon__email ti ti-search"></i>
             <input class="newsletter-form__input" type="email" placeholder="Ingresa tu email">
-            <app-button [text]="'Enviar'" [type]="'submit'" [classCustom]="{
-                base: 'button', 
-                bgColor: 'primary', 
-                textColor: 'white',
-                more: [
-                'z-index-100',
-                'p-absolute',
-                'top-10',
-                'right-10',
-                'rounded-lg',
-                'mt-1']
-                
-                }">
+            <app-button [text]="'Enviar'" [type]="'submit'" variant="primary" size="md">
             </app-button>
         </form>
     </article>

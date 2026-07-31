@@ -18,12 +18,12 @@
   &__title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--text-primary);
   }
 
   &__count {
     font-size: 0.875rem;
-    color: var(--color-text-secondary);
+    color: var(--text-secondary);
   }
 
   &__grid {
@@ -59,10 +59,10 @@
     width: 100%;
     padding: 0.6rem;
     margin-top: 0.5rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--border-secondary);
     border-radius: var(--border-radius);
     background: transparent;
-    color: var(--color-text-secondary);
+    color: var(--text-secondary);
     font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -72,9 +72,9 @@
     }
 
     &:hover {
-      background-color: var(--color-error-bg, #fef2f2);
-      color: var(--color-error, #dc2626);
-      border-color: var(--color-error, #dc2626);
+      background-color: var(--color-error-soft, #fef2f2);
+      color: var(--color-danger, #dc2626);
+      border-color: var(--color-danger, #dc2626);
     }
   }
 
@@ -94,20 +94,20 @@
 
   &__empty-icon {
     font-size: 3.5rem;
-    color: var(--color-text-tertiary, #ccc);
+    color: var(--text-tertiary, #ccc);
     margin-bottom: 1rem;
   }
 
   &__empty-title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
   }
 
   &__empty-text {
     font-size: 0.875rem;
-    color: var(--color-text-secondary);
+    color: var(--text-secondary);
     line-height: 1.5;
   }
 }

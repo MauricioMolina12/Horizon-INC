@@ -1,0 +1,76 @@
+<div
+
+  class="accordion-item"
+  [class.accordion-item--open]="isOpen"
+  [class.accordion-item--danger]="variant === 'danger'"
+  [class.accordion-item--disabled]="disabled"
+  [attr.data-state]="state()"
+  [attr.data-accordion-id]="accordionId"
+  role="region"
+>
+
+  <!-- ═══ TRIGGER / HEADER ═══ -->
+  <button
+    class="accordion-item__trigger"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-controls]="'accordion-body-' + accordionId"
+    [disabled]="disabled"
+    (click)="toggle()"
+    type="button"
+  >
+
+    <!-- Left section: icon + title -->
+    <div class="accordion-item__trigger-left">
+      @if (icon) {
+        <i class="accordion-item__icon" [class]="icon"></i>
+      }
+
+      <!-- Custom header template -->
+      @if (headerTemplate) {
+        <ng-template
+          [ngTemplateOutlet]="headerTemplate"
+          [ngTemplateOutletContext]="{
+            $implicit: { isExpanded: isOpen, state: state(), toggle: toggle }
+          }"
+        />
+      } @else {
+        <!-- Default header: title + description -->
+        <div class="accordion-item__header-text">
+          <span class="accordion-item__title">{{ title }}</span>
+          @if (description) {
+            <span class="accordion-item__desc">{{ description }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Chevron indicator -->
+    <i
+      class="ti ti-chevron-down accordion-item__chevron"
+      [class.accordion-item__chevron--open]="isOpen"
+    ></i>
+
+  </button>
+
+  <!-- ═══ BODY / CONTENT ═══ -->
+  <div
+    class="accordion-item__body-wrapper"
+    [id]="'accordion-body-' + accordionId"
+    [style.--accordion-body-height]="'auto'"
+    role="region"
+  >
+    <div class="accordion-item__body">
+      @if (contentTemplate) {
+        <ng-template
+          [ngTemplateOutlet]="contentTemplate"
+          [ngTemplateOutletContext]="{
+            $implicit: { isExpanded: isOpen, state: state(), close: close }
+          }"
+        />
+      } @else {
+        <ng-content />
+      }
+    </div>
+  </div>
+
+</div>

@@ -1,9 +1,0 @@
-@import "../../../../shared/styles/inputs.scss";
-@import "../../../../shared/styles/auth.scss";
-@import "../../../../../styles.scss";
-@import "breakpoints";
-
-/* Phones */
-.container {
-  @include layoutAuth();
-}

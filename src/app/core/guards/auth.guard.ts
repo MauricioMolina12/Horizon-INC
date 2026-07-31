@@ -4,14 +4,13 @@ import { Store } from '@ngrx/store';
 import { filter, map, take } from 'rxjs/operators';
 import { selectAuthLoaded, selectIsAuthenticated } from '../../store/user/user.selectors';
 import { combineLatest } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
-/**
- * Functional route guard.
- * Waits until the session check has completed, then allows or redirects.
- */
+
 export const authGuard: CanActivateFn = () => {
-  const store = inject(Store);
-  const router = inject(Router);
+  const store       = inject(Store);
+  const router      = inject(Router);
+  const authService = inject(AuthService);
 
   return combineLatest([
     store.select(selectAuthLoaded),
@@ -21,7 +20,9 @@ export const authGuard: CanActivateFn = () => {
     take(1),
     map(([, authenticated]) => {
       if (authenticated) return true;
-      return router.createUrlTree(['/user/login']);
+      
+      authService.redirectToSignIn();
+      return false;
     })
   );
 };

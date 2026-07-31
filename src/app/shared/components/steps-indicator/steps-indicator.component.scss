@@ -17,7 +17,7 @@
       left: 0;
       width: 100%;
       height: 1px;
-      background-color: #ccc;
+      background-color: var(--border-disabled, #ccc);
       transform: translateY(-50%);
       z-index: 0;
       border-radius: 2px;
@@ -28,7 +28,7 @@
       top: 50%;
       left: 0;
       height: 1px;
-      background-color: #2892a4;
+      background-color: var(--color-teal, #2892a4);
       transform: translateY(-50%);
       z-index: 1;
       border-radius: 2px;
@@ -51,17 +51,17 @@
         line-height: 32px;
         text-align: center;
         border-radius: 50%;
-        background-color: #ccc;
+        background-color: var(--text-disabled, #ccc);
         color: white;
         font-weight: 600;
       }
 
       &.completed .step-number {
-        background-color: #2892a4;
+        background-color: var(--color-teal, #2892a4);
       }
 
       &.current .step-number {
-        background-color: #07454c;
+        background-color: var(--color-primary-secondary, #07454c);
       }
     }
   }

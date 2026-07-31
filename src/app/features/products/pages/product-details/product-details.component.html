@@ -8,17 +8,7 @@
         </div>
         <div class="actions">
           <app-button [text]="'Comprar ahora'" aria-label="Este botón comprará el producto actual" [type]="'submit'"
-          [classCustom]="{
-          base: 'button', 
-          bgColor: 'white', 
-          textColor: 'primary',
-          more: [
-                'rounded-lg',
-                'mt-1',
-                'p-4'              
-          ]
-               
-          }">
+          variant="secondary" size="sm">
           </app-button>
         </div>
       </header>
@@ -34,21 +24,8 @@
             <figure class="product__images--main">
               <img class="image" [src]="mainImage" appZoomImage [zoomFactor]="3"
                 [alt]="product?.name || 'Producto sin nombre'" loading="lazy" />
-                <app-button [icon]="isFavorite() ? 'icon-favorite_filled' : 'icon-heart'" (clicked)="favoriteProduct()"
-              variant="ghost" [classCustom]="{
-              bgColor: 'light',
-              more: [
-                'rounded-lg',
-                'flex',
-                'items-center',
-                'justify-center',
-                'p-absolute',
-                'top-10',
-                'right-10',
-                'text-3xl',
-                isFavorite() ? 'color-red' : ''
-              ]
-            }">
+                <app-button [icon]="isFavorite() ? 'ti ti-heart-filled' : 'ti ti-heart'" (clicked)="favoriteProduct()"
+              variant="ghost" ariaLabel="Agregar a favoritos">
                 </app-button>
 
               </figure>
@@ -76,7 +53,7 @@
 
               <div class="product__information--rating">
                 <div class="product__information--rating-star">
-                  <i class="icon-star-yellow"></i>
+                  <i class="ti ti-star"></i>
                   <span>4.9 rating</span>
                 </div>
                 <span>·</span>
@@ -123,7 +100,7 @@
                         @for (shipping of shipping; track $index) {
                           <div class="item flex items-center gap-4" >
                             <div class="icon-wrapper">
-                              <i class="icon" [ngClass]="shipping.icon"></i>
+                              <i class="ti" [ngClass]="shipping.icon"></i>
                             </div>
                             <div class="value">
                               <span class="label">{{shipping.label}}</span>
@@ -140,7 +117,7 @@
                     @for (group of featureGroups; track group.title) {
                       <article class="product__information--features-group">
                         <header class="group-header">
-                          <i [ngClass]="group.icon"></i>
+                          <i class="ti" [ngClass]="group.icon"></i>
                           <h4 class="title">{{ group.title }}</h4>
                         </header>
                         <div class="group-table">
@@ -164,7 +141,7 @@
                       <div class="rating-star">
                         <figure>
                           @for (star of [].constructor(5); track star) {
-                            <i class="icon-star-yellow"></i>
+                            <i class="ti ti-star"></i>
                           }
                         </figure>
                         <span>Basado en 153 opiniones</span>
@@ -205,11 +182,7 @@
                 </div>
               </div>
               <div class="actions">
-              <app-button (clicked)="buyNow()" [text]="'Comprar ahora'" [classCustom]="{
-                base: 'button',
-                bgColor: 'secondary',
-                textColor: 'white',
-                more: ['w-full','p-4', 'rounded-lg', 'text-sm']}">
+              <app-button (clicked)="buyNow()" [text]="'Comprar ahora'" variant="primary" size="lg" [fullWidth]="true">
                 </app-button>
 
               <div class="add-to-cart-wrapper" [class.added]="addedToCart()">
@@ -217,20 +190,13 @@
                   (clicked)="addToCart()"
                   [text]="addedToCart() ? 'Agregado' : 'Agregar al carrito'"
                   [iconPosition]="'left'"
-                  [icon]="addedToCart() ? 'icon-shopping_bag_speed' : 'icon-shop-cart'"
-                  [classCustom]="{
-                    base: 'button',
-                    bgColor: addedToCart() ? 'success' : 'light-blue',
-                    textColor: addedToCart() ? 'white' : 'secondary',
-                    more: ['w-full','p-4','rounded-lg','flex','items-center','justify-center', 'text-sm']}">
+                  [icon]="addedToCart() ? 'ti ti-shopping-bag' : 'ti ti-shopping-cart'"
+                  [variant]="addedToCart() ? 'success' : 'secondary'" size="lg" [fullWidth]="true">
                 </app-button>
               </div>
 
-                <app-button (clicked)="openModal()" [text]="'Compartir'" [iconPosition]="'left'" [icon]="'icon-share'"
-                [variant]="'ghost'" [classCustom]="{
-              base: 'button', 
-              bgColor: 'secondary', 
-              more: ['w-full','p-4','rounded-lg','flex','items-center','justify-center', 'text-sm']}">
+                <app-button (clicked)="openModal()" [text]="'Compartir'" [iconPosition]="'left'" [icon]="'ti ti-share'"
+                variant="ghost" size="lg" [fullWidth]="true">
                 </app-button>
 
 

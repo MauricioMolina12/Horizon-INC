@@ -1,209 +1,205 @@
-<nav class="nav-bar">
+<nav class="nav-bar" [class.scrolled]="isScrolled">
 
-  <div class="nav-bar__inner">
+  <div class="nav-bar__inner mw-global">
 
-
-    <!-- Logo-->
-    <div class=" nav-bar__left">
+    <!-- ═══ LEFT: Logo + Greeting ═══ -->
+    <div class="nav-bar__left">
       <i class="icon icon-holnex nav-bar__logo" [routerLink]="['']"></i>
-      @if (isLoaded()) {
-        <div class="nav-bar__left--title">Hola, <span>{{userName()}}</span></div>
-      }
+      <span class="nav-bar__greeting">
+        Hola, <strong>{{ ((isLoaded() && userName()) ? userName() : 'bienvenido') | truncateUsername }}</strong>
+      </span>
     </div>
 
-
-    <!-- Input search component -->
-    <div class=" nav-bar__center" [ngClass]="{'active' : viewSearchInput}">
-      <app-search-input (closeWrapper)="viewSearchInput = false"></app-search-input>
+    <!-- ═══ CENTER: Search (desktop only) ═══ -->
+    <div class="nav-bar__search">
+      <app-search-input></app-search-input>
     </div>
 
+    <!-- ═══ RIGHT ═══ -->
+    <div class="nav-bar__right" #navRight>
 
-    <!-- Elements only visibility in mobile screen -->
-    <div class=" nav-bar__right" [class.no-visibility]="viewSearchInput">
+      <a class="nav-bar__icon-btn" [routerLink]="'/favorites'" aria-label="Favoritos">
+        <i class="ti ti-heart"></i>
+      </a>
 
-      <!-- Button burguer -->
-      <button aria-label="Abrir menú lateral" class="nav-bar__items-button-bars"
-        (click)="toggleElement($event, 'nav-bar__sidebar','')">
-        <div class="icon-bars" [class.active]="viewSideBar">
-          <span class="bars-line"></span>
-          <span class="bars-line"></span>
-        </div>
+      <a class="nav-bar__icon-btn" [routerLink]="'/shopcart'" aria-label="Carrito">
+        <i class="ti ti-shopping-cart"></i>
+      </a>
+
+      <a class="nav-bar__icon-btn" (click)="openNotifications()" aria-label="Notificaciones">
+        <i class="ti ti-bell"></i>
+        @if (unreadCount() > 0) {
+          <span class="nav-bar__badge">{{ unreadCount() }}</span>
+        }
+      </a>
+
+      <!-- Avatar → opens user menu popover -->
+      <button class="nav-bar__avatar-btn" (click)="!isMobile ? toggleUserMenu() : toggleSidebar()" aria-label="Menú de usuario">
+        @if (user()?.avatar) {
+          <img [src]="user()?.avatar" [alt]="user()?.name" class="nav-bar__avatar-img" />
+        } @else {
+          <span class="nav-bar__avatar-initial">{{ userInitial() }}</span>
+        }
       </button>
-    </div>
 
+      <!-- ═══ DESKTOP USER MENU popover ═══ -->
+      @if (!isMobile && userMenuOpen) {
+        <div class="user-menu-overlay" (click)="closeUserMenu()"></div>
+        <div class="user-menu" [class.visible]="userMenuOpen">
 
-    <div class="nav-bar__sidebar">
-
-      <button class="close-button" (click)="toggleElement($event, 'nav-bar__sidebar','')">X</button>
-
-      <ul class="nav-bar__sidebar-list user-list">
-        @for (item of userItems; track $index) {
-        <li class="nav-bar__sidebar-list-item" #itemRef (click)="item?.action($event, itemRef)"
-          (mouseenter)="seeTooltipItem(item.title || '')" (mouseleave)="seeTooltipItemLeave()">
-
-          @if (item.profile && isLoaded()) {
-          <div class="nav-bar__sidebar-list-item-user"
-            [ngClass]="{'not-logged' : !isAuthenticated(), 'logged' : isAuthenticated()}">
-
-            <div class="nav-bar__sidebar-list-item-user-content">
-
-              <figure class="user-avatar"
-                (click)="isAuthenticated() && toggleElement($event, 'nav-bar__modal-profile')">
-                <img [src]="userAvatar()" [alt]="userName()" />
-              </figure>
-
-              <div class="user-info">
-                <h5 class="user-name">{{ isAuthenticated() ? userName() : 'Ingresar cuenta' }}</h5>
-                <span class="user-email">{{ isAuthenticated() ? userEmail() : 'Podrás interactuar con tu cuenta'
-                  }}</span>
+          @if (isAuthenticated()) {
+            <div class="user-menu__header" [routerLink]="['/profile']" (click)="closeUserMenu()">
+              <div class="user-menu__avatar">
+                @if (user()?.avatar) {
+                  <img [src]="user()?.avatar" [alt]="user()?.name" />
+                } @else {
+                  <span class="user-menu__initial">{{ userInitial() }}</span>
+                }
               </div>
-
+              <div class="user-menu__info">
+                <span class="user-menu__name">{{ user()?.name }}</span>
+                <span class="user-menu__email">{{ user()?.username }}</span>
+              </div>
             </div>
-
-            <div class="nav-bar__sidebar-list-item-user-actions">
-              @if (!isAuthenticated()) {
-              <button class="button-login" [routerLink]="'/user/login'">Iniciar sesión</button>
-              }
-              @if (isAuthenticated()) {
-              <button class="button-edit" [routerLink]="'/profile'">Editar perfil</button>
-              }
+          } @else {
+            <div class="user-menu__not-auth">
+              <a class="user-menu__btn-primary" [href]="authDomain">Iniciar sesión</a>
+              <a class="user-menu__btn-secondary" [href]="authDomain + '/signup'">Crear cuenta</a>
             </div>
-
-          </div>
           }
 
-          <!-- Only items -->
-          @if (!item.profile) {
-          <ng-container>
-            <i class="nav-bar__sidebar-list-item-icon" [ngClass]="item.icon"></i>
-            @if (item.unread && unreadCount() > 0) {
-            <span class="nav-bar__sidebar-list-item-unread">{{ unreadCount() }}</span>
-            }
-            <div class="nav-bar__sidebar-list-item-value">
-              <h5 class="item-title">{{ item.title }}</h5>
-              @if (item.subtitle) {
-              <span class="item-subtitle">{{ item.subtitle }}</span>
-              }
+          <div class="user-menu__section">
+            <span class="user-menu__label">Cuenta</span>
+            <a class="user-menu__item" [routerLink]="'/profile'" (click)="closeUserMenu()">
+              <i class="ti ti-user"></i> Mi perfil
+            </a>
+            <a class="user-menu__item" [routerLink]="'/profile/orders'" (click)="closeUserMenu()">
+              <i class="ti ti-package"></i> Mis compras
+            </a>
+            <a class="user-menu__item" (click)="closeUserMenu()">
+              <i class="ti ti-history"></i> Mi historial
+            </a>
+          </div>
+
+          <!-- <div class="user-menu__section">
+            <span class="user-menu__label">Preferencias</span>
+            <div class="user-menu__item user-menu__theme-toggle">
+              <i [class]="isDark() ? 'ti ti-sun' : 'ti ti-moon'"></i>
+              <span>{{ isDark() ? 'Modo claro' : 'Modo oscuro' }}</span>
+              <label class="user-menu__switch">
+                <input type="checkbox" (change)="toggleMoodDark($event)" [checked]="isDark()" />
+                <span class="user-menu__slider"></span>
+              </label>
             </div>
-          </ng-container>
-          }
-        </li>
-        }
-      </ul>
+          </div> -->
 
-      <!-- <div class="toggle-container desktop-toogle-theme">
-      <label class="switch">
-        <input type="checkbox" (change)="toggleMoodDark($event)" [checked]="isDark()" />
-        <span class="slider"></span>
-      </label>
-    </div> -->
-      <ul class="nav-bar__sidebar-list settings-list">
-        <div class="nav-bar__sidebar-list-item">
-          <i class="nav-bar__sidebar-list-item-icon theme" [ngClass]="isDark() ? 'icon-sun' : 'icon-moon'"></i>
-          <div class="nav-bar__sidebar-list-item-value">
-            <h5 class="item-title">{{isDark() ? 'Modo claro' : 'Modo oscuro' }}</h5>
+          <div class="user-menu__section">
+            <span class="user-menu__label">Configuración</span>
+            <a class="user-menu__item" [routerLink]="'/profile/settings'" (click)="closeUserMenu()">
+              <i class="ti ti-settings"></i> Configuración
+            </a>
+            <a class="user-menu__item" (click)="closeUserMenu()">
+              <i class="ti ti-help"></i> Ayuda
+            </a>
           </div>
-          <div class="toggle-container">
-            <label class="switch">
-              <input type="checkbox" (change)="toggleMoodDark($event)" [checked]="isDark()" />
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-        @for (item of configItems; track $index) {
-        <li class="nav-bar__sidebar-list-item">
-          <i class="nav-bar__sidebar-list-item-icon" [ngClass]="item.icon"></i>
-          <div class="nav-bar__sidebar-list-item-value">
-            <h5 class="item-title">{{ item.title }}</h5>
-            @if (item.subtitle) {
-            <span class="item-subtitle">{{ item.subtitle }}</span>
-            }
-          </div>
-        </li>
-        }
-      </ul>
 
-    </div>
-
-    <div class="nav-bar__panels">
-
-      @switch (activePanel) {
-      @case ('notifications') {
-      <div class="nav-bar__panel" [ngStyle]="panelStyle" appClickOutside (appClickOutside)="activePanel = null">
-        <app-notifications-panel></app-notifications-panel>
-      </div>
-      }
-      }
-
-    </div>
-
-
-    <!-- Side bar -->
-    <!-- Modal only in desktop screen -->
-    <div class="nav-bar__modal-profile">
-      <div class="nav-bar__modal-profile-user" [routerLink]="['/profile']">
-        <div class="nav-bar__modal-profile-avatar">
-          <img [src]="userAvatar()" [alt]="'Imagen de: ' + userName()" />
-        </div>
-        <div class="nav-bar__modal-profile-info">
-          <h1 class="nav-bar__modal-profile-name">{{ userName() }}</h1>
-          <span class="nav-bar__modal-profile-email">{{ userEmail() }}</span>
-        </div>
-      </div>
-      <div class="nav-bar__modal-profile-item">
-        <i class="nav-bar__modal-profile-item-icon icon-location"></i>
-        <div class="nav-bar__modal-profile-item-value">
-          <h5 class="nav-bar__modal-profile-item-title">Dirección</h5>
-          <h5 class="nav-bar__modal-profile-item-subtitle">{{ userAddress() }}</h5>
-        </div>
-      </div>
-
-      @if (isSeller()) {
-      <div class="nav-bar__modal-profile-item" [routerLink]="['/my-stores']">
-        <i class="nav-bar__modal-profile-item-icon icon-store"></i>
-        <div class="nav-bar__modal-profile-item-value">
-          <h5 class="nav-bar__modal-profile-item-title">Mis tiendas</h5>
-          <span class="nav-bar__modal-profile-item-subtitle">Administra tus tiendas y productos</span>
-        </div>
-      </div>
-      }
-
-      @for (item of configItems; track $index) {
-      <div class="nav-bar__modal-profile-item" [routerLink]="[item.path]">
-        <i class="nav-bar__modal-profile-item-icon" [ngClass]="item.icon"></i>
-        <div class="nav-bar__modal-profile-item-value">
-          <h5 class="nav-bar__modal-profile-item-title">{{ item.title }}</h5>
-          @if (item.subtitle) {
-          <span class="nav-bar__modal-profile-item-subtitle">
-            {{ item.subtitle }}
-          </span>
+          @if (isAuthenticated()) {
+            <div class="user-menu__footer">
+              <button class="user-menu__item user-menu__item--danger" (click)="logOut()">
+                <i class="ti ti-logout"></i> Cerrar sesión
+              </button>
+            </div>
           }
-          @if (item.unread == true && unreadCount() > 0) {
-          <span class="nav-bar__modal-profile-item-pending-number">{{ unreadCount() }}</span>
-          }
-        </div>
-        @if (item.unread == true && unreadCount() > 0) {
-        <div class="nav-bar__modal-profile-item-pending-dot"></div>
-        }
-      </div>
-      }
-      <!-- <div class="nav-bar__item">
-    <i class="nav-bar__item-icon" [ngClass]="isMoodDark ? 'icon-sun' : 'icon-moon'"></i>
-    <div class="nav-bar__item-value">
-      <h5 class="nav-bar__item-title">{{isMoodDark ? 'Modo claro' : 'Modo oscuro' }}</h5>
-    </div>
-    <div class="toggle-container">
-      <label class="switch">
-        <input type="checkbox" (change)="toggleMoodDark($event)" [checked]="themeService.isDark" />
-        <span class="slider"></span>
-      </label>
-    </div>
-  </div> -->
 
+        </div>
+      }
 
     </div>
 
   </div>
-
-
 </nav>
+
+<!-- ════════════════════════════════════════ -->
+<!-- MOBILE SIDEBAR                           -->
+<!-- ════════════════════════════════════════ -->
+@if (isMobile) {
+  <div class="sidebar-overlay" [class.visible]="viewSideBar" (click)="close()"></div>
+
+  <aside class="sidebar" [class.visible]="viewSideBar">
+
+    <div class="sidebar__header">
+      <!-- <i class="icon icon-holnex sidebar__logo"></i> -->
+      <button class="sidebar__close" (click)="close()" aria-label="Cerrar menú">
+        <span class="sidebar__close-x">✕</span>
+      </button>
+    </div>
+
+    @if (isAuthenticated()) {
+      <div class="sidebar__profile" [routerLink]="['/profile']" (click)="close()">
+        <div class="sidebar__profile-avatar">
+          @if (user()?.avatar) {
+            <img [src]="user()?.avatar" [alt]="user()?.name" />
+          } @else {
+            <span class="sidebar__profile-initial">{{ userInitial() }}</span>
+          }
+        </div>
+        <div class="sidebar__profile-info">
+          <span class="sidebar__profile-name">{{ user()?.name }}</span>
+          <span class="sidebar__profile-email">{{ user()?.username }}</span>
+        </div>
+      </div>
+    } @else {
+      <a class="sidebar__login-cta" [href]="authDomain" (click)="close()">Iniciar sesión</a>
+      <a class="sidebar__signup-cta" [href]="authDomain + '/signup'" (click)="close()">Crear cuenta</a>
+    }
+
+    <div class="sidebar__nav">
+      <span class="sidebar__group-label">Navegación</span>
+
+      @for (item of userItems; track item.code) {
+        @if (item.path) {
+          <a class="sidebar__item" [routerLink]="item.path" (click)="close()">
+            <i [class]="item.icon"></i>
+            <span class="sidebar__item-title">{{ item.title }}</span>
+            @if (item.unread && unreadCount() > 0) {
+              <span class="sidebar__item-badge">{{ unreadCount() }}</span>
+            }
+          </a>
+        } @else {
+          <button class="sidebar__item" (click)="onItemClick(item)">
+            <i [class]="item.icon"></i>
+            <span class="sidebar__item-title">{{ item.title }}</span>
+          </button>
+        }
+      }
+
+      <span class="sidebar__group-label">Configuración</span>
+
+      @for (item of configItems; track item.code) {
+        @if (item.path) {
+          <a class="sidebar__item" [routerLink]="item.path" (click)="close()">
+            <i [class]="item.icon"></i>
+            <span class="sidebar__item-title">{{ item.title }}</span>
+          </a>
+        } @else {
+          <button class="sidebar__item" (click)="onItemClick(item)">
+            <i [class]="item.icon"></i>
+            <span class="sidebar__item-title">{{ item.title }}</span>
+          </button>
+        }
+      }
+    </div>
+
+    <!-- <div class="sidebar__footer">
+      <div class="sidebar__theme">
+        <i [class]="isDark() ? 'ti ti-sun' : 'ti ti-moon'"></i>
+        <span>{{ isDark() ? 'Modo claro' : 'Modo oscuro' }}</span>
+      </div>
+      <label class="sidebar__switch">
+        <input type="checkbox" (change)="toggleMoodDark($event)" [checked]="isDark()" />
+        <span class="sidebar__slider"></span>
+      </label>
+    </div> -->
+
+  </aside>
+}
