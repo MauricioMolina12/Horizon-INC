@@ -1,0 +1,26 @@
+{
+  "environments": {
+    "development": {
+      "bucket_name": "112505220408.holnex.com",
+      "region": "us-east-1",
+      "build_command": "ng build --configuration=development",
+      "dist_path": "../dist/holnex/browser",
+      "cloudfront": {
+        "enabled": true,
+        "distribution_id": "E1A18FUVHABP9C",
+        "paths": ["/*"]
+      }
+    },
+    "production": {
+      "bucket_name": "holnex.com",
+      "region": "us-east-1",
+      "build_command": "ng build --configuration=production",
+      "dist_path": "../dist/holnex/browser",
+      "cloudfront": {
+        "enabled": true,
+        "distribution_id": "E3M1MYRJQI0OI",
+        "paths": ["/*"]
+      }
+    }
+  }
+}

@@ -28,6 +28,7 @@ import { TooltipDirective } from './shared/directives/tooltip.directive';
 import { NotificationsModule } from './features/notifications/notifications.module';
 import { favoritesReducer } from './features/favorites/store/favorites.reducer';
 import { FavoritesEffects } from './features/favorites/store/favorites.effects';
+import { ToastContainerComponent } from './shared/components/toast/toast-container.component';
 
 // Auth provider
 import { AUTH_PROVIDER, SessionAuthProvider } from './core/auth';
@@ -51,7 +52,8 @@ import { AccordionComponent } from './shared/components/accordion/accordion.comp
     NotificationsModule,
     StoreModule.forFeature('favorites', favoritesReducer),
     EffectsModule.forFeature([FavoritesEffects]),
-    TooltipDirective
+    TooltipDirective,
+    ToastContainerComponent
   ],
   exports: [TooltipDirective],
   providers: [

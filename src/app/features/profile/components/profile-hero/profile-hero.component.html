@@ -19,15 +19,14 @@
           }
         </div>
         @if (showEditBtn()) {
-          <button class="hero__avatar-edit" (click)="avatarChange.emit()"
-                  aria-label="Cambiar foto de perfil">
+          <button class="hero__avatar-edit" (click)="avatarChange.emit()" aria-label="Cambiar foto de perfil">
             <i class="ti ti-pencil"></i>
           </button>
         }
       </div>
 
       <h1 class="hero__name">{{ u.name }}</h1>
-      <p class="hero__email">{{ u.username }}</p>
+      <p class="hero__email">@{{ u.username }}</p>
 
       <div class="hero__meta">
         <span class="hero__meta-item">

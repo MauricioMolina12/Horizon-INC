@@ -34,25 +34,15 @@
         <span class="settings__field-error">Ingresa un usuario válido</span>
         }
 
+        @if (usernameError()) {
+        <span class="settings__field-error" role="alert">{{ usernameError() }}</span>
+        }
+
         <div class="settings__field">
           <label class="settings__field-label" for="phone">Teléfono</label>
           <app-input id="phone" type="tel" formControlName="phone" placeholder="+52 55 1234 5678">
           </app-input>
         </div>
-
-        @if (saveError()) {
-        <div class="settings__message settings__message--error">
-          <i class="ti ti-alert-circle"></i>
-          {{ saveError() }}
-        </div>
-        }
-
-        @if (saveSuccess()) {
-        <div class="settings__message settings__message--success">
-          <i class="ti ti-check-circle"></i>
-          Cambios guardados correctamente
-        </div>
-        }
 
         <div class="settings__actions">
           <app-button (clicked)="saveAccount()" [text]="saving() ? 'Guardando...' : 'Guardar cambios'"
@@ -73,7 +63,7 @@
           <div class="settings__danger-zone--item__action">
             <app-button (clicked)="deleteAccount()"
               [text]="deletingAccount() ? 'Eliminando cuenta...' : 'Eliminar cuenta'" [loading]="deletingAccount()"
-              [disabled]="deletingAccount()" [variant]="'danger'" [size]="'sm'">
+              [disabled]="deletingAccount()" [variant]="'danger-outline'" [size]="'sm'">
             </app-button>
           </div>
         </div>

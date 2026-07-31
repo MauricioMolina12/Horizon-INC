@@ -225,6 +225,12 @@ export class UserEffects {
       tap(() => this.splashService.show()),
       switchMap(() =>
         this.authService.logout().pipe(
+          tap(() => {
+            this.cookieService.deleteCookies([
+              'holnex_id_token',
+              'holnex_access_token',
+            ]);
+          }),
           switchMap(() => of(logoutSuccess(), clearUserCache())),
           catchError(() => of(logoutSuccess(), clearUserCache())),
         ),
@@ -255,14 +261,17 @@ export class UserEffects {
       ofType(updateAuthUser),
       switchMap(({ userId, data }) =>
         this.userService.updateUser(userId, data).pipe(
-          tap((user) => console.log('Respuesta backend:', user)),
           map((user) => updateAuthUserSuccess({ user })),
+          catchError((error) => {
+            const body = error?.error as | { errorMessage?: string; result?: string } | undefined;
+            const message = body?.errorMessage || error?.message || 'Failed to update user';
+            return of(updateAuthUserFailure({ error: message }));
+          }),
         ),
       ),
     ),
   );
 
-  // ── Delete account ───────────────────────────────────────────
   deleteAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteAccount),
@@ -286,8 +295,11 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(deleteAccountSuccess),
         tap(() => {
+          this.cookieService.deleteCookies([
+            'holnex_id_token',
+            'holnex_access_token',
+          ]);
           this.indexedDbService.clear();
-          // Redirect immediately to sign-in — no logout API call needed
           if (this.document?.defaultView) {
             window.location.href = `${environment.authDomain}/signin`;
           }

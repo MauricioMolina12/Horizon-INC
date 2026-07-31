@@ -13,6 +13,7 @@ import { AccordionComponent } from '../../../../shared/components/accordion/acco
 import { InputComponent } from '../../../../shared/components/ui/input/input.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs';
+import { ToastService } from '../../../../shared/components/toast/toast.service';
 
 interface Address {
   id: string;
@@ -41,6 +42,7 @@ export class ProfileSettingsComponent {
   private profileFacade = inject(ProfileFacade);
   private fb = inject(FormBuilder);
   private modalService = inject(ModalService);
+  private toastService = inject(ToastService);
 
   readonly openSectionId = signal<string | null>(null);
   readonly saving = this.profileFacade.isUpdating;
@@ -111,6 +113,40 @@ export class ProfileSettingsComponent {
     country: ['', Validators.required],
   });
 
+  readonly usernameError = signal<string | null>(null);
+
+  private watchUsernameChanges = effect(() => {
+    this.formValue();
+    const usernameCtrl = this.accountForm.get('username');
+    const hasBackendError = this.usernameError() !== null;
+
+    if (hasBackendError && usernameCtrl?.dirty) {
+      this.usernameError.set(null);
+    }
+  });
+
+  private notifySaveResult = effect(() => {
+    const saving = this.saving();
+    const error = this.profileFacade.error();
+    const pending = this.saveSuccess();
+
+    if (saving) return;
+
+    if (pending && !error) {
+      this.usernameError.set(null);
+      this.toastService.success('Cambios guardados','Tu información se actualizó correctamente.',{ position: 'bottom-right' },);
+    } else if (error) {
+      if (error.toLowerCase().includes('usuario') || error.toLowerCase().includes('username')) {
+        this.usernameError.set(error);
+      } else {
+        this.usernameError.set(null);
+        this.toastService.danger('Error al guardar', 'Ha ocurrido un error. Inténtalo de nuevo más tarde.', { position: 'bottom-right' });
+      }
+    }
+
+    this.saveSuccess.set(false);
+  });
+
   private syncForm = effect(() => {
     if (this.saving()) return;
 
@@ -165,15 +201,21 @@ export class ProfileSettingsComponent {
     const changedFields: Record<string, string> = {};
     const formVal = this.accountForm.value;
 
-    if (formVal.name     !== u.name)        changedFields['full_name'] = formVal.name;
-    if (formVal.username !== u.username)    changedFields['username']  = formVal.username;
-    if (formVal.phone    !== u.phone)       changedFields['phone']     = formVal.phone;
+    if (formVal.name !== u.name) changedFields['full_name'] = formVal.name;
+    if (formVal.username !== u.username)
+      changedFields['username'] = formVal.username;
+    if (formVal.phone !== u.phone) changedFields['phone'] = formVal.phone;
 
     if (Object.keys(changedFields).length === 0) {
-      setTimeout(() => this.saveSuccess.set(false), 3000);
+      this.toastService.info(
+        'Sin cambios',
+        'No hay modificaciones para guardar.',
+      );
+      this.saveSuccess.set(false);
       return;
     }
 
+    this.saveSuccess.set(true);
     this.profileFacade.updateUser(u.id, changedFields);
   }
 

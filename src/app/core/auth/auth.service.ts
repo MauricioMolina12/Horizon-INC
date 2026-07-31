@@ -2,6 +2,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { CookieService } from '../services/cookie.service';
 
@@ -53,12 +54,14 @@ export class AuthService {
    */
   logout(): Observable<void> {
     const accessToken = this.cookieService.getCookie('holnex_access_token');
-    return this.http.post<void>(`${environment.BASE_URL}/session/logout`, {
-      body: {
+
+    return this.http.post<void>(
+      `${environment.BASE_URL}/session/logout`,
+      {
         data: {
           access_token: accessToken,
         },
       },
-    });
+    )
   }
 }
